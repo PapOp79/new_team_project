@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.health.mybatis.myMapper">
+  
+  	<select id="loginCheck" resultType="Udto">
+  		select * from UserDB where userId=#{id}
+  	</select>
+  	
+  	<select id="idCheck" resultType="Udto">
+  		select userid from UserDB
+  	</select>
+  	
+  	<select id="idPormCheck" resultType="Udao">
+  		select userid from UserDB
+  	</select>
+  	
+  	<insert id="joinCheck" parameterType="Udto">
+        insert into userDB (userId, userPw, userName, userEmail, userRegDate, Admin, userAge, userHeight, userWeight, userSex) values(#{userId},#{userPw},#{userName},#{userEmail},current_date,#{Admin},#{userAge}, #{userHeight}, #{userWeight}, #{userSex})
+     </insert>
+     
+     <update id="userInfoModify" parameterType="Udto">
+     	update userDB set userPw=#{userPw}, userName=#{userName}, userEmail=#{userEmail} where userId=#{userId} 
+	  </update>
+     <update id="modifyCheck" parameterType="Udto">
+     	update userDB set userPw=#{userPw},userEmail=#{userEmail},userName=#{userName} where userId=#{userId}
+     </update>
+     
+     <delete id="delsuccess" parameterType="String">
+     	delete from userDB where userId=#{id} 
+     </delete>
+   
+  	<!-- 락카  -->
+  	<select id="lockerList" resultType="Ldto">
+  		select * from lockerDB order by lockerNum asc
+  	</select>
+  	
+  	<select id="lockerMemberInfo" resultType="Ldao">
+  		select * from lockerDB where lockerNum=#{num}
+  	</select>
+ 
+   	<update id="lockerJoin" parameterType="Ldto">
+        update lockerDB set lockerNum=#{lockerNum}, lockerName=#{lockerName}, lockerStartDate=#{lockerStartDate}, lockerEndDate=#{lockerEndDate}, lockerCheck= #{lockerCheck} where lockerNum=#{lockerNum}
+     </update>
+     
+	<select id="lockerCheck" resultType="int">
+  		select lockerCheck from lockerDB where lockerNum=#{lockerNum}
+  	</select>
+  	
+  	<select id="lockerRegiOkMember" resultType="Ldto">
+  		select * from lockerDB where lockerNum=#{lockerNum}
+  	</select>
+  	
+  	<select id="pwchk" resultType="String">
+  		select userPw from UserDB where userId=#{id}
+  	</select>
+  	
+   	<update id="lockerModify" parameterType="Ldto">
+        update lockerDB set lockerNum=#{lockerNum}, lockerName=#{lockerName}, lockerStartDate=#{lockerStartDate}, lockerEndDate=#{lockerEndDate} where lockerNum=#{lockerNum}
+    </update>
+     
+    <update id="lockerDelete" parameterType="Ldto">
+    	update lockerDB set lockerNum=#{lockerNum}, lockerName=#{lockerName}, lockerStartDate=#{lockerStartDate}, lockerEndDate=#{lockerEndDate}, lockerCheck= #{lockerCheck} where lockerNum=#{lockerNum}
+    </update>
+
+  	
+  </mapper>
