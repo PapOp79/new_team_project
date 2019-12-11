@@ -77,5 +77,14 @@
     	update lockerDB set lockerNum=#{lockerNum}, lockerName=#{lockerName}, lockerStartDate=#{lockerStartDate}, lockerEndDate=#{lockerEndDate}, lockerCheck= #{lockerCheck} where lockerNum=#{lockerNum}
     </update>
 
+		<!--  ==================티켓 쿼리=================================== -->
   	
+  	<select id="ticketList" resultType="Tdto">
+  		select * from ticketDB order by ticketDuration asc
+  	</select>
+  	
+	<select id="exlist" resultType="Edto">
+	<!-- select * from mvc_board -->
+	select * from exBoard;
+	</select>
   </mapper>
