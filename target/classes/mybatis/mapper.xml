@@ -31,6 +31,18 @@
      <delete id="delsuccess" parameterType="String">
      	delete from userDB where userId=#{id} 
      </delete>
+     
+   	<select id="userList" resultType="Udto">
+  		select * from userDB where admin=0 order by userRegDate desc
+  	</select>
+  	
+  	<select id="trainerList" resultType="Udto">
+  		select * from userDB where admin=2 order by userRegDate desc
+  	</select>
+  	
+  	<select id="getTotalPage" resultType="Udto">
+  		select count(*) from userDB where admin=0 order by userRegDate desc
+  	</select>
    
   	<!-- 락카  -->
   	<select id="lockerList" resultType="Ldto">

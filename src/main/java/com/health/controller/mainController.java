@@ -141,6 +141,22 @@ public class mainController {
 	      return "index";
 	   }
 	   
+	   @RequestMapping("userList")
+	   public String userList(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   login = (LoginService) applicationContext.getBean("userListServiceImpl");
+		   login.execute(model);
+		   return "userList";
+	   }
+	   
+	   @RequestMapping("trainerList")
+	   public String trainerList(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   login = (LoginService) applicationContext.getBean("trainerListServiceImpl");
+		   login.execute(model);
+		   return "trainerList";
+	   }
+	   
 	   //--------------------------락카-----------------------------------------------------------------------------
 	   @RequestMapping("lockerView")
 	   public String rockerView(Model model) {
