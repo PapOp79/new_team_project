@@ -12,11 +12,12 @@ import com.health.dto.lockerDTO;
 
 @Component
 public class lockerDAO {
+	@Autowired 
+	private SqlSession sqlSession;
+	
 	private static userDAO dao = new userDAO();
 	private static final String namespace = "com.health.mybatis.myMapper"; 
 
-	@Autowired 
-	private SqlSession sqlSession;
 	
 	public List<lockerDTO> lockerList() { 
 		return sqlSession.selectList(namespace + ".lockerList"); //여러개의 데이터를 가져올떄 

@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.health.dao.userDAO;
 import com.health.service.LockerService;
 import com.health.service.LoginService;
+import com.health.service.TicketService;
 
 @Controller
 public class mainController {
 	private LoginService login;
 	private LockerService locker;
+	private TicketService ts;
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
 	@RequestMapping("index")
@@ -30,6 +32,13 @@ public class mainController {
 		return "ex";
 	}
 
+	@RequestMapping("ticketPop")
+	public String ticketPop() {
+		return "ticketPop";
+	}
+
+	
+
 	@RequestMapping("mypage")
 	public String mypage() {
 		return "mypage";
@@ -38,6 +47,11 @@ public class mainController {
 	@RequestMapping("login")
 	public String login() {
 		return "login";
+	}
+	
+	@RequestMapping("ticket")
+	public String ticket() {
+		return "ticket";
 	}
 	@RequestMapping("machineView")
 	public String machineView() {
@@ -207,4 +221,24 @@ public class mainController {
 		   locker.execute(model);
 		   return "";
 	   }	
+	   
+	   //---------------------회원권 controller--------------------------
+	   @RequestMapping("ticketView")
+	   public String ticketView(Model model) {
+		  ts = (TicketService) applicationContext.getBean("ticketListViewServiceImpl");
+		  ts.execute(model);
+	      return "ticketView";
+	   }
+
+	   @RequestMapping("ticketRegister")
+	   public String ticketRegister(Model model) {
+	   ts = (TicketService) applicationContext.getBean("ticketRegisterServiceImpl");
+	   ts.execute(model);
+//		   ts = (TicketService) applicationContext.getBean("ticketListViewServiceImpl");
+//		   ts.execute(model);
+		   return "ticketRegister";
+	   }
+	   
+	   
+	   
 }

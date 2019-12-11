@@ -15,6 +15,8 @@
   		<typeAlias type="com.health.dao.userDAO" alias="Udao" />
   		<typeAlias type="com.health.dao.lockerDAO" alias="Ldao" />
   		<typeAlias type="com.health.dto.lockerDTO" alias="Ldto" />
+  		<typeAlias type="com.health.dto.ticketDTO" alias="Tdto" />
+  		<typeAlias type="com.health.dao.ticketDAO" alias="Tdao" />
 
   	</typeAliases>
   </configuration>

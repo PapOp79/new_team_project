@@ -144,7 +144,7 @@
                   <div class="dropdown-menu music-menu">
 
                      <div>
-                        <a class="dropdown-item music-tap" onclick="return location.href='machineView'"style="color: white;">기구 예약</a>
+                        <a class="dropdown-item music-tap" onclick="return location.href='ticketView'"style="color: white;">회원권 예약</a>
                         <div class="dropdown-menu music-menu">
                            <!-- 
                <a class="dropdown-item music-tap" data-toggle="modal" href="#lavieenrose">La Vie En Rose MV</a>
