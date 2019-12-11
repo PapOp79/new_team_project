@@ -8,11 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.health.dao.userDAO;
 import com.health.service.LockerService;
 import com.health.service.LoginService;
+import com.health.service.exBoardService;
+import com.health.service.exBoardViewServiceImpl;
 
 @Controller
 public class mainController {
@@ -20,6 +23,7 @@ public class mainController {
 	private LockerService locker;
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
+	
 	@RequestMapping("index")
 	public String test() {
 		return "index";
@@ -207,4 +211,12 @@ public class mainController {
 		   locker.execute(model);
 		   return "";
 	   }	
+	   
+	   
+	   //----------------------------운동방법------------------------------------------
+
+		
+		   
+	   
+	 
 }

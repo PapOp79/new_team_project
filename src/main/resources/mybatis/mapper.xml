@@ -64,6 +64,9 @@
     <update id="lockerDelete" parameterType="Ldto">
     	update lockerDB set lockerNum=#{lockerNum}, lockerName=#{lockerName}, lockerStartDate=#{lockerStartDate}, lockerEndDate=#{lockerEndDate}, lockerCheck= #{lockerCheck} where lockerNum=#{lockerNum}
     </update>
-
   	
+	<select id="exlist" resultType="Edto">
+	<!-- select * from mvc_board -->
+	select * from exBoard;
+	</select>
   </mapper>
