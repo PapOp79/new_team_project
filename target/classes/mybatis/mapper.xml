@@ -71,4 +71,8 @@
   		select * from ticketDB order by ticketDuration asc
   	</select>
   	
+	<select id="exlist" resultType="Edto">
+	<!-- select * from mvc_board -->
+	select * from exBoard;
+	</select>
   </mapper>
