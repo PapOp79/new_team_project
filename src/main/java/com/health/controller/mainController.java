@@ -2,6 +2,7 @@ package com.health.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.RequestWrapper;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -16,13 +17,14 @@ import com.health.service.LockerService;
 import com.health.service.LoginService;
 import com.health.service.TicketService;
 import com.health.service.exBoardService;
-import com.health.service.exBoardViewServiceImpl;
+import com.health.service.exBoardListServiceImpl;
 
 @Controller
 public class mainController {
 	private LoginService login;
 	private LockerService locker;
 	private TicketService ts;
+	private exBoardService eboard;
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
 	
@@ -32,9 +34,12 @@ public class mainController {
 	}
 
 	@RequestMapping("ex")
-	public String ex() {
+	public String ex(HttpServletRequest request, Model model) {
+		eboard = (exBoardListServiceImpl)applicationContext.getBean("exBoardListServiceImpl");
+		eboard.execute(model);
 		return "ex";
 	}
+	
 
 	@RequestMapping("ticketPop")
 	public String ticketPop() {
@@ -262,10 +267,22 @@ public class mainController {
 	   
 	   
 	   
-	   //----------------------------운동방법------------------------------------------
-
-		
-		   
+	   //----------------------------운동법 페이지------------------------------------------
+ 
+	   @RequestMapping(value="/exboard_write", method=RequestMethod.POST)
+		public String exboard_write(HttpServletRequest request,Model model){
+			model.addAttribute("request",request);
+			eboard = (exBoardService) applicationContext.getBean("exBoardSaveServiceImpl");
+			eboard.execute(model);
+			return "redirect:ex";
+		}
+	   @RequestMapping("exboard_content")
+	 		public String content(HttpServletRequest request,Model model){
+	 			model.addAttribute("request",request);
+	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
+	 			eboard.execute(model);
+	 			return "exModal/exModal";
+	 		}
 	   
 	 
 }

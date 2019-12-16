@@ -7,7 +7,8 @@ private String name;
 private String title;
 private String content;
 private Timestamp savedate;
-private int hit;
+private int part;
+private int num;
 
 private int pageIndex = 1;
 private int pageSize = 10;
@@ -58,12 +59,19 @@ public Timestamp getSavedate() {
 public void setSavedate(Timestamp savedate) {
 	this.savedate = savedate;
 }
-public int getHit() {
-	return hit;
+public int getPart() {
+	return part;
 }
-public void setHit(int hit) {
-	this.hit = hit;
+public void setPart(int part) {
+	this.part = part;
 }
+public int getNum() {
+	return num;
+}
+public void setNum(int num) {
+	this.num = num;
+}
+
 
 
 }

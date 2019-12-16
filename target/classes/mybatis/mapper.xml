@@ -82,9 +82,24 @@
   	<select id="ticketList" resultType="Tdto">
   		select * from ticketDB order by ticketDuration asc
   	</select>
-  	
+
+	<!--  ==================운동법 페이지=================================== -->  	
 	<select id="exlist" resultType="Edto">
-	<!-- select * from mvc_board -->
-	select * from exBoard;
+	
+	select * from exBoard
 	</select>
+	
+		<insert id="exboardwrite" parameterType="Edto">
+	insert into exBoard(name,title,content,savedate,part,num) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard))
+	</insert>
+
+<select id="exBoardContent" resultType="Edto">
+	
+	select * from exBoard where num=#{num}
+	</select>
+
+
+
   </mapper>
+  
+  
