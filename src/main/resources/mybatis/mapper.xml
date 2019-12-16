@@ -87,4 +87,9 @@
 	<!-- select * from mvc_board -->
 	select * from exBoard;
 	</select>
+	
+	<!-- ==============게시판============== -->
+	<select id="boardList" resultType="Bdto">
+  		select * from board order by num desc
+  	</select>
   </mapper>

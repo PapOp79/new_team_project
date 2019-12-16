@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.health.dao.userDAO;
+import com.health.service.BoardService;
 import com.health.service.LockerService;
 import com.health.service.LoginService;
 import com.health.service.TicketService;
@@ -23,6 +24,7 @@ public class mainController {
 	private LoginService login;
 	private LockerService locker;
 	private TicketService ts;
+	private BoardService board;
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
 	
@@ -40,8 +42,6 @@ public class mainController {
 	public String ticketPop() {
 		return "ticketPop";
 	}
-
-	
 
 	@RequestMapping("mypage")
 	public String mypage() {
@@ -61,10 +61,7 @@ public class mainController {
 	public String machineView() {
 		return "machineView";
 	}
-	@RequestMapping("board")
-	public String board() {
-		return "board";
-	}
+	
 
 	@RequestMapping("mypagechk")
 	public String mypagechk() {
@@ -267,5 +264,16 @@ public class mainController {
 		
 		   
 	   
-	 
+	   // ===================게시판======================
+	   @RequestMapping("board")
+	   public String board(Model model) {
+		   board = (BoardService) applicationContext.getBean("boardListServiceImpl");
+		   board.execute(model);
+		   return "board";
+	   }
+	   
+	   @RequestMapping("boardwrite")
+	   public String boardwrite() {
+		   return "boardwrite";
+	   }
 }
