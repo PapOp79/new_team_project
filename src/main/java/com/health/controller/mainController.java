@@ -25,14 +25,10 @@ public class mainController {
 	private LoginService login;
 	private LockerService locker;
 	private TicketService ts;
-<<<<<<< HEAD
 	private BoardService board;
-=======
 	private exBoardService eboard;
->>>>>>> branch 'master' of https://github.com/PapOp79/new_team_project.git
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
-	
 	@RequestMapping("index")
 	public String test() {
 		return "index";
@@ -45,7 +41,6 @@ public class mainController {
 		return "ex";
 	}
 	
-
 	@RequestMapping("ticketPop")
 	public String ticketPop() {
 		return "ticketPop";
@@ -70,7 +65,6 @@ public class mainController {
 		return "machineView";
 	}
 	
-
 	@RequestMapping("mypagechk")
 	public String mypagechk() {
 		return "mypagechk";
@@ -295,5 +289,14 @@ public class mainController {
 	   @RequestMapping("boardwrite")
 	   public String boardwrite() {
 		   return "boardwrite";
+	   }
+	   
+	   @RequestMapping("/boardview")
+	   public String boardview(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   board = (BoardService) applicationContext.getBean("boardViewServiceImpl");
+		   board.execute(model);
+			
+		   return "boardview";
 	   }
 }

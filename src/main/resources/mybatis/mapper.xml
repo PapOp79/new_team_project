@@ -85,29 +85,23 @@
 
 	<!--  ==================운동법 페이지=================================== -->  	
 	<select id="exlist" resultType="Edto">
-	
-	select * from exBoard
+		select * from exBoard
 	</select>
 	
-<<<<<<< HEAD
+	<insert id="exboardwrite" parameterType="Edto">
+		insert into exBoard(name,title,content,savedate,part,num) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard))
+	</insert>
+
+	<select id="exBoardContent" resultType="Edto">
+		select * from exBoard where num=#{num}
+	</select>
+
 	<!-- ==============게시판============== -->
 	<select id="boardList" resultType="Bdto">
   		select * from board order by num desc
   	</select>
+  	
+  	<select id="boardview" resultType="Bdto">
+  		select * from board where num=#{num}
+  	</select>
   </mapper>
-=======
-		<insert id="exboardwrite" parameterType="Edto">
-	insert into exBoard(name,title,content,savedate,part,num) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard))
-	</insert>
-
-<select id="exBoardContent" resultType="Edto">
-	
-	select * from exBoard where num=#{num}
-	</select>
-
-
-
-  </mapper>
-  
-  
->>>>>>> branch 'master' of https://github.com/PapOp79/new_team_project.git

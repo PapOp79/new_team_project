@@ -3,6 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+
+	function writechk(){
+			<% String name = (String)session.getAttribute("user_id");
+			if(name == null) {%>
+				alert('로그인이 필요합니다! 로그인 페이지로 이동합니다');
+				location.href="login";
+			<%} else { %>
+			location.href="boardwrite";
+		<%}%>
+}
+
+</script>
+
 <title>Insert title here</title>
 </head>
 <link rel="stylesheet" type="text/css"
@@ -26,12 +40,14 @@
 			</tr>
 			<c:forEach var="Bdto" items="${boardList}">
 			<tr style = "color: white;">
-				<td>${Bdto.num}</td><td>${Bdto.hit}</td><td>${Bdto.title}</td>
+				<td>${Bdto.num}</td><td>${Bdto.hit}</td><td><a href=boardview?num=${Bdto.num}>${Bdto.title}</a></td>
 				<td>${Bdto.name}</td><td>${Bdto.postdate}</td>
 			</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="5"><a href ="boardwrite" >글작성</a></td>
+				<td colspan="5">
+				<input type="button" value="글작성" onclick="writechk()"> 
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -39,5 +55,5 @@
 </body>
 <div style="position: fixed; bottom: 60px; margin-left: 30PX;">
    <%@ include file="include/footer.jspf" %>
-   </div> 
+</div> 
 </html> 

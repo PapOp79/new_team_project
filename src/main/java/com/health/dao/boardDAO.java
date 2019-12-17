@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.health.dto.boardDTO;
@@ -18,6 +17,10 @@ public class boardDAO {
 	
 	public List<boardDTO> boardlist() {
 		return sqlSession.selectList(namespace + ".boardList");
+	}
+	
+	public boardDTO boardview(String num) {
+		return sqlSession.selectOne(namespace+".boardview", num);
 	}
 	
 	public boardDTO boardInfo(String name) {
