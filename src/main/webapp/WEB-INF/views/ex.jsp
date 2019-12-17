@@ -9,24 +9,23 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	
 %>
 
+<c:set var="num" value="1"/>
 
 
+<!--      모달 창 띄우기를 스크립트 함수로 실행시켜보자        -->
 
-
-
-
-<script type="text/javascript">
+<script>
+	var num;
 	var hiiden = false;
-
 	function startpage() {
 		document.getElementById('bbbb').style.display = 'none';
-
 	}
-
+	
 	function change() {
-
 		hidden = !hidden;
 		if (hidden) {
 			document.getElementById('aaaa').style.display = 'none';
@@ -34,35 +33,26 @@
 		} else {
 			document.getElementById('bbbb').style.display = 'none';
 			document.getElementById('aaaa').style.display = 'inline';
-
-		}
+	}}
+	
+		function exboard_content(){
+		
+			var url = "/healthProjectSample/src/main/webapp/WEB-INF/views/exModal/exModal.jsp";
+		
+			
+			$("#exboard_content > .modal-dialog").load(url, function(){
+			$("#exboard_content").modal("show");
+		});}
+		
+	function numClick(){
+		
 	}
-	/*
-	 var hidden = false;
-	 function change() {
-	 hidden = !hidden;
-	 if(hidden) {
-	 document.getElementById('bbbb').style.visibility = 'hidden';
-	 document.getElementById('aaaa').style.visibility = 'visible';
-	 } else {
-	 document.getElementById('aaaa').style.visibility = 'hidden';
-	 document.getElementById('bbbb').style.visibility = 'visible';   
-	
-	 }
-	 }
-	 */
-	/*
-	 function changeFront(){
-	
-	 document.getElementById('bbbb').style.visibility = 'hidden';
-	 document.getElementById('aaaa').style.visibility = 'visible';
-	 }
-	 function changeBack(){
-	 document.getElementById('aaaa').style.visibility = 'hidden';
-	 document.getElementById('bbbb').style.visibility = 'visible';   
-	 }
+	$(function(){
 
-	 */
+		$('#exboard_content').draggable();
+
+		});
+
 </script>
 <style type="text/css">
 .wrap {
@@ -106,7 +96,7 @@ body {
 	</div>
 	<hr style="border: solid 4px white;">
 
-
+	<button id="exBoard" onclick="exboard_content();">임시</button>
 
 	<div align="center" style="position: relative;">
 
@@ -147,7 +137,54 @@ body {
 </body>
 <!-- 모달 영역 -->
 <!-- 글 보기 -->
+<div class="modal fade" id="exboard_content" tabindex="-1" role="dialog"
+	style="background: none; top: 20%; color: #ff7f00;">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content"
+			style="background-color: #000000; background-color: rgba(0, 0, 0, 0.2); color: white;">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">글</h4>
+			</div>
+			<div class="modal-body">
 
+				<c:forEach items="${exList}" var="Edto">
+					<c:if test="${Edto.num eq num}">
+					<table border="1" style="background-color:#ffffff;">
+						<tr>
+							<td width="60" height="30" align="center">작성자</td>
+							<td width="120">${Edto.name}</td>
+							<td width="60" height="30" align="center">제목</td>
+							<td  width="260">${Edto.title}</td>
+						</tr> 
+						<tr>
+							<td  height="30" colspan="4" align="center">내용</td>
+						</tr>
+						<tr>
+							
+							<td height="310" colspan="4" align="center">${Edto.content}</td>
+						</tr>
+						
+						<tr>
+							<td colspan="4"><input type="submit" value="수정">
+								&nbsp;&nbsp; <a href="list">목록보기</a> &nbsp;&nbsp; <a
+								href="delete">삭제</a>&nbsp;&nbsp; <a href="reply_view">답변</a></td>
+						</tr>
+					</table>
+					</c:if>
+				</c:forEach>
+				<div>
+					<br>
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-toggle="modal" data-target="#myModal"
+						class="btn btn-default" data-dismiss="modal" style="color: white;">뒤로가기</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						style="color: white;">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- 글쓰기 -->
 <div class="modal fade" id="newText" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel"
@@ -205,7 +242,7 @@ body {
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel"
-	style="background: none; top: 20%; color: #ff7f00;" >
+	style="background: none; top: 20%; color: #ff7f00;">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content"
 			style="background-color: #000000; background-color: rgba(0, 0, 0, 0.8); color: white;">
@@ -229,9 +266,10 @@ body {
 							<c:forEach items="${exList}" var="Edto">
 								<c:if test="${Edto.part == 1 }">
 									<tr>
+										
 										<td height="30">${Edto.name}</td>
-										<td height="30"><a href="exboard_content?num=${num}" data-toggle="modal"
-											data-dismiss="modal">${Edto.title}</a></td>
+										<td height="30"><a href="#exboard_content" 
+											data-toggle="modal" data-dismiss="modal">${Edto.title}</a></td>
 										<td height="30">${Edto.savedate }</td>
 									</tr>
 								</c:if>

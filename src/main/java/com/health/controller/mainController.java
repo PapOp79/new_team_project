@@ -276,12 +276,12 @@ public class mainController {
 			eboard.execute(model);
 			return "redirect:ex";
 		}
-	   @RequestMapping("exboard_content")
+	   @RequestMapping(value="/exboard_content", method=RequestMethod.POST)
 	 		public String content(HttpServletRequest request,Model model){
 	 			model.addAttribute("request",request);
 	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
 	 			eboard.execute(model);
-	 			return "exModal/exModal";
+	 			return "ex";
 	 		}
 	   
 	 
