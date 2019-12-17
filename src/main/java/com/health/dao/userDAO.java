@@ -12,6 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.health.dto.lockerDTO;
+import com.health.dto.pageDTO;
 import com.health.dto.userDTO;
 import com.health.dao.userDAO;
 
@@ -137,4 +139,35 @@ public class userDAO {
 	public int updateTicket(String id) {
 		return sqlSession.selectOne(namespace + ".updateTicket", id);
 	}
+	
+	public List<userDTO> userList() { 
+		return sqlSession.selectList(namespace + ".userList"); //여러개의 데이터를 가져올떄 
+	} 
+	
+	public List<userDTO> trainerList() { 
+		return sqlSession.selectList(namespace + ".trainerList"); //여러개의 데이터를 가져올떄 
+	}
+	
+	//-----paging----------------------------------------------------------
+	public int getTotalPage() {
+	      return sqlSession.selectOne(namespace + ".getTotalPage");
+	   }
+	   
+	   
+	   public pageDTO pagingNum(int start) {
+	      System.out.println("start : "+start);
+	      if(start == 0)start=1;
+	      pageDTO pc = new pageDTO();
+	      int pageNum=3;
+	      int totalPage = getTotalPage();
+	      int totEndPage = totalPage/pageNum + (totalPage%pageNum == 0 ?0 :1);
+	      int startPage = (start - 1) * pageNum + 1;
+	      int endPage = pageNum * start;
+	      pc.setTotEndPage(totEndPage);
+	      pc.setStartPage(startPage);
+	      pc.setEndPage(endPage);
+	      return pc;
+	   }
+	
+	
 }

@@ -36,6 +36,18 @@
      <delete id="delsuccess" parameterType="String">
      	delete from userDB where userId=#{id} 
      </delete>
+     
+   	<select id="userList" resultType="Udto">
+  		select * from userDB where admin=0 order by userRegDate desc
+  	</select>
+  	
+  	<select id="trainerList" resultType="Udto">
+  		select * from userDB where admin=2 order by userRegDate desc
+  	</select>
+  	
+  	<select id="getTotalPage" resultType="Udto">
+  		select count(*) from userDB where admin=0 order by userRegDate desc
+  	</select>
    
   	<!-- 락카  -->
   	<select id="lockerList" resultType="Ldto">
@@ -90,8 +102,30 @@
   	
   		<!-- 운동법 쿼리 -->
   	
+	<!--  ==================운동법 페이지=================================== -->  	
 	<select id="exlist" resultType="Edto">
-	<!-- select * from mvc_board -->
-	select * from exBoard;
+	
+	select * from exBoard
 	</select>
+	
+	<!-- ==============게시판============== -->
+	<select id="boardList" resultType="Bdto">
+  		select * from board order by num desc
+  	</select>
+  	
+  	
+  	
+	<insert id="exboardwrite" parameterType="Edto">
+		insert into exBoard(name,title,content,savedate,part,num) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard))
+	</insert>
+
+<select id="exBoardContent" resultType="Edto">
+	
+	select * from exBoard where num=#{num}
+	</select>
+
+
+
   </mapper>
+  
+  

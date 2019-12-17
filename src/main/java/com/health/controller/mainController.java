@@ -2,6 +2,7 @@ package com.health.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.RequestWrapper;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -12,17 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.health.dao.userDAO;
+import com.health.service.BoardService;
 import com.health.service.LockerService;
 import com.health.service.LoginService;
 import com.health.service.TicketService;
 import com.health.service.exBoardService;
-import com.health.service.exBoardViewServiceImpl;
+import com.health.service.exBoardListServiceImpl;
 
 @Controller
 public class mainController {
 	private LoginService login;
 	private LockerService locker;
 	private TicketService ts;
+	private BoardService board;
+	private exBoardService eboard;
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
 	
@@ -32,9 +36,12 @@ public class mainController {
 	}
 
 	@RequestMapping("ex")
-	public String ex() {
+	public String ex(HttpServletRequest request, Model model) {
+		eboard = (exBoardListServiceImpl)applicationContext.getBean("exBoardListServiceImpl");
+		eboard.execute(model);
 		return "ex";
 	}
+	
 
 	
 
@@ -42,8 +49,6 @@ public class mainController {
 	public String ticketPop() {
 		return "ticketPop";
 	}
-
-	
 
 	@RequestMapping("mypage")
 	public String mypage() {
@@ -63,10 +68,7 @@ public class mainController {
 	public String machineView() {
 		return "machineView";
 	}
-	@RequestMapping("board")
-	public String board() {
-		return "board";
-	}
+	
 
 	@RequestMapping("mypagechk")
 	public String mypagechk() {
@@ -159,6 +161,22 @@ public class mainController {
 	      login.execute(model);
 	   
 	      return "index";
+	   }
+	   
+	   @RequestMapping("userList")
+	   public String userList(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   login = (LoginService) applicationContext.getBean("userListServiceImpl");
+		   login.execute(model);
+		   return "userList";
+	   }
+	   
+	   @RequestMapping("trainerList")
+	   public String trainerList(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   login = (LoginService) applicationContext.getBean("trainerListServiceImpl");
+		   login.execute(model);
+		   return "trainerList";
 	   }
 	   
 	   //--------------------------락카-----------------------------------------------------------------------------
@@ -258,10 +276,33 @@ public class mainController {
 	   
 	   
 	   
-	   //----------------------------운동방법------------------------------------------
-
-		
-		   
+	   //----------------------------운동법 페이지------------------------------------------
+ 
+	   @RequestMapping(value="/exboard_write", method=RequestMethod.POST)
+		public String exboard_write(HttpServletRequest request,Model model){
+			model.addAttribute("request",request);
+			eboard = (exBoardService) applicationContext.getBean("exBoardSaveServiceImpl");
+			eboard.execute(model);
+			return "redirect:ex";
+		}
+	   @RequestMapping("exboard_content")
+	 		public String content(HttpServletRequest request,Model model){
+	 			model.addAttribute("request",request);
+	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
+	 			eboard.execute(model);
+	 			return "exModal/exModal";
+	 		}
 	   
-	 
+	   // ===================게시판======================
+	   @RequestMapping("board")
+	   public String board(Model model) {
+		   board = (BoardService) applicationContext.getBean("boardListServiceImpl");
+		   board.execute(model);
+		   return "board";
+	   }
+	   
+	   @RequestMapping("boardwrite")
+	   public String boardwrite() {
+		   return "boardwrite";
+	   }
 }

@@ -36,7 +36,7 @@ color:white;
       <table style="width: 100%;">
            <tr>
            <td>
-            <input class="gray_textbox" type="text" style="margin-left:15%; width:85%; height:30px; align-self: center;"  value="0" id ="Admin" name = "Admin" hidden="true">
+            <input class="gray_textbox" type="text" style="margin-left:15%; width:85%; height:30px; align-self: center;"  value="2" id ="Admin" name = "Admin" hidden="true">
            </td>
             
          </tr>
