@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.health.dto.lockerDTO;
+import com.health.dto.ticketBuyerDTO;
 import com.health.dto.ticketDTO;
 
 @Repository
@@ -31,4 +32,13 @@ public class ticketDAO {
 	public List<ticketDTO> ticketList() { 
 		return sqlSession.selectList(namespace + ".ticketList"); //여러개의 데이터를 가져올떄 
 	} 
+
+	public int registerTicket(ticketBuyerDTO TBdto) { 
+		return sqlSession.insert(namespace + ".registerTicket", TBdto); //여러개의 데이터를 가져올떄 
+	} 
+	
+	public List<ticketBuyerDTO> myTicketlist(String id) { 
+		return sqlSession.selectList(namespace + ".myTicketlist", id); //여러개의 데이터를 가져올떄 
+	} 
+	
 }

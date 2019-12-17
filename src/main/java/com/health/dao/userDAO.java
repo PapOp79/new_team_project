@@ -135,6 +135,10 @@ public class userDAO {
 	public String pwchk(String id) {
 		return sqlSession.selectOne(namespace + ".pwchk", id);
 	}
+
+	public int updateTicket(String id) {
+		return sqlSession.selectOne(namespace + ".updateTicket", id);
+	}
 	
 	public List<userDTO> userList() { 
 		return sqlSession.selectList(namespace + ".userList"); //여러개의 데이터를 가져올떄 

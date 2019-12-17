@@ -18,7 +18,7 @@
   <button class="w3-bar-item w3-button w3-hide-large"
   onclick="w3_close()">Close &times;</button>
   <a href="#" class="w3-bar-item w3-button">회원 정보</a>
-  <a href="#" class="w3-bar-item w3-button">내 회원권 보기</a>
+  <a href="myTicket" class="w3-bar-item w3-button">내 회원권 보기</a>
   <a href="#" class="w3-bar-item w3-button">내 질문 보기</a>
   <a href="#" class="w3-bar-item w3-button">쪽지함</a>
   <c:choose>

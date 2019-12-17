@@ -24,6 +24,11 @@
      <update id="userInfoModify" parameterType="Udto">
      	update userDB set userPw=#{userPw}, userName=#{userName}, userEmail=#{userEmail} where userId=#{userId} 
 	  </update>
+	  
+     <update id="updateTicket" parameterType="String">
+     	update userDB set Ticket=1 where userId=#{id} 
+	  </update>
+	  
      <update id="modifyCheck" parameterType="Udto">
      	update userDB set userPw=#{userPw},userEmail=#{userEmail},userName=#{userName} where userId=#{userId}
      </update>
@@ -83,6 +88,20 @@
   		select * from ticketDB order by ticketDuration asc
   	</select>
 
+  	<select id="myTicketlist" resultType="TBdto">
+  		select * from ticketBuyerDB where ticketbuyerid=#{id}
+  	</select>
+
+  	<select id="ticketYesorNo" resultType="TBdto">
+  		select * from ticketBuyerDB where ticketbuyerid=#{id}
+  	</select>
+  	
+  	<insert id="registerTicket" parameterType="TBdto">
+  		insert into ticketBuyerDB (ticketBuyerName, ticketBuyerID, ticketstartdate, ticketenddate, ticketprice, ticketduration) values(#{ticketBuyerName},#{ticketBuyerId},#{ticketStartDate},#{ticketEndDate},#{ticketPrice},#{ticketDuration}) 
+  	</insert>
+  	
+  		<!-- 운동법 쿼리 -->
+  	
 	<!--  ==================운동법 페이지=================================== -->  	
 	<select id="exlist" resultType="Edto">
 		select * from exBoard
@@ -104,4 +123,19 @@
   	<select id="boardview" resultType="Bdto">
   		select * from board where num=#{num}
   	</select>
+  	
+  	
+	<insert id="exboardwrite" parameterType="Edto">
+		insert into exBoard(name,title,content,savedate,part,num) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard))
+	</insert>
+
+<select id="exBoardContent" resultType="Edto">
+	
+	select * from exBoard where num=#{num}
+	</select>
+
+
+
   </mapper>
+  
+  
