@@ -36,6 +36,8 @@ public class mainController {
 		return "ex";
 	}
 
+	
+
 	@RequestMapping("ticketPop")
 	public String ticketPop() {
 		return "ticketPop";
@@ -228,14 +230,17 @@ public class mainController {
 	   
 	   //---------------------회원권 controller--------------------------
 	   @RequestMapping("ticketView")
-	   public String ticketView(Model model) {
+	   public String ticketView(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
 		  ts = (TicketService) applicationContext.getBean("ticketListViewServiceImpl");
 		  ts.execute(model);
+		
 	      return "ticketView";
 	   }
 
 	   @RequestMapping("ticketRegister")
-	   public String ticketRegister(Model model) {
+	   public String ticketRegister(Model model, HttpServletRequest request) {
+	   model.addAttribute("request",request);
 	   ts = (TicketService) applicationContext.getBean("ticketRegisterServiceImpl");
 	   ts.execute(model);
 //		   ts = (TicketService) applicationContext.getBean("ticketListViewServiceImpl");
@@ -243,6 +248,13 @@ public class mainController {
 		   return "ticketRegister";
 	   }
 	   
+	   @RequestMapping("myTicket")
+		public String myTicket(Model model, HttpServletRequest request) {
+		   model.addAttribute("request", request);
+		   ts = (TicketService) applicationContext.getBean("myTicketServiceImpl");
+		   ts.execute(model);
+			return "myTicket";
+		}
 	   
 	   
 	   

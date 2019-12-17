@@ -9,7 +9,16 @@ public class ticketBuyerDTO {
 	private Date ticketStartDate;
 	private Date ticketEndDate;
 	private int ticketPrice;
+	private int ticketDuration;
 	
+	
+	
+	public int getTicketDuration() {
+		return ticketDuration;
+	}
+	public void setTicketDuration(int ticketDuration) {
+		this.ticketDuration = ticketDuration;
+	}
 	public String getTicketBuyerName() {
 		return ticketBuyerName;
 	}

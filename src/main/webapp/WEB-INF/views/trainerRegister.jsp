@@ -24,8 +24,8 @@ color:white;
    <%@ include file="include/header.jspf" %>
    
    
-   <div id="trainer_register_div" style="background-color: rgba(17,17,17,0.8); width:1200px; height:1000px; border-color: #fe6000; border-style:double; 
-	position: absolute; top:50%; left:50%; margin-top:-500px; margin-left:-600px;">
+   <div id="trainer_register_div" style="background-color: rgba(17,17,17,0.8); width:60%; height:1000px; border-color: #fe6000; border-style:double; 
+	position: absolute; left:20%;">
    
    <h4 class="modal-title" style="font-family:dohyun; color:white; margin-left:15%; margin-top:5%; font-weight: normal;">
       <span style="color: #fe6000;">HOUGYM</span> Trainer등록<br><br>

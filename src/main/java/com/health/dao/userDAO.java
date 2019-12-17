@@ -133,4 +133,8 @@ public class userDAO {
 	public String pwchk(String id) {
 		return sqlSession.selectOne(namespace + ".pwchk", id);
 	}
+
+	public int updateTicket(String id) {
+		return sqlSession.selectOne(namespace + ".updateTicket", id);
+	}
 }

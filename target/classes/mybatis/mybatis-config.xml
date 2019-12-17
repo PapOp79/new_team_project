@@ -17,6 +17,7 @@
   		<typeAlias type="com.health.dto.lockerDTO" alias="Ldto" />
   		<typeAlias type="com.health.dto.ticketDTO" alias="Tdto" />
   		<typeAlias type="com.health.dao.ticketDAO" alias="Tdao" />
+  		<typeAlias type="com.health.dto.ticketBuyerDTO" alias="TBdto" />
 
 		<typeAlias type="com.health.dto.exBoardDTO" alias="Edto" />
 		<typeAlias type="com.health.dao.exBoardDAO" alias="Edao" />
