@@ -1,5 +1,7 @@
 package com.health.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.health.dao.userDAO;
@@ -276,13 +279,7 @@ public class mainController {
 			eboard.execute(model);
 			return "redirect:ex";
 		}
-	   @RequestMapping(value="/exboard_content", method=RequestMethod.POST)
-	 		public String content(HttpServletRequest request,Model model){
-	 			model.addAttribute("request",request);
-	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
-	 			eboard.execute(model);
-	 			return "ex";
-	 		}
-	   
+	 
+	
 	 
 }

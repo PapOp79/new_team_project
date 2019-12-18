@@ -7,40 +7,36 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="modal fade" id="exboard_content" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel"
-	style="background: none; top: 20%; color: #ff7f00;">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content"
-			style="background-color: #000000; background-color: rgba(0, 0, 0, 0.2); color: white;">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel"> 글 </h4>
+<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">글</h4>
 			</div>
 			<div class="modal-body">
 
-			
-					<table border="1">
-						<tr>
-							<td>작성자</td>
-							<td>${dto.name}</td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td>${dto.title}</td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td>${dto.content}</td>
-						</tr>
-						<tr>
-							<td colspan="2"><input type="submit" value="수정">
-								&nbsp;&nbsp; <a href="list">목록보기</a> &nbsp;&nbsp; <a
-								href="delete">삭제</a>&nbsp;&nbsp; <a
-								href="reply_view">답변</a></td>
-						</tr>
-					</table>
-	
+				<c:forEach items="${exList}" var="Edto">
+					<c:if test="${Edto.num eq num}">
+						<table border="1" style="background-color: #ffffff;">
+							<tr>
+								<td width="60" height="30" align="center">작성자</td>
+								<td width="120">${Edto.name}</td>
+								<td width="60" height="30" align="center">제목</td>
+								<td width="260">${Edto.title}</td>
+							</tr>
+							<tr>
+								<td height="30" colspan="4" align="center">내용</td>
+							</tr>
+							<tr>
 
+								<td height="310" colspan="4" align="center">${Edto.content}</td>
+							</tr>
+
+							<tr>
+								<td colspan="4"><input type="submit" value="수정">
+									&nbsp;&nbsp; <a href="list">목록보기</a> &nbsp;&nbsp; <a
+									href="delete">삭제</a>&nbsp;&nbsp; <a href="reply_view">답변</a></td>
+							</tr>
+						</table>
+					</c:if>
+				</c:forEach>
 				<div>
 					<br>
 				</div>
@@ -50,9 +46,5 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal"
 						style="color: white;">닫기</button>
 				</div>
-			</div>
-		</div>
-	</div>
-</div>
 </body>
 </html>
