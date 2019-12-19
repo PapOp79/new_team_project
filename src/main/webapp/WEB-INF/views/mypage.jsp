@@ -24,11 +24,9 @@ border-radius: 12px 12px / 12px 12px;
 
 <meta charset="UTF-8">
 <title>myPage2</title>
-
 	<script>
 		function deletechk(){
 			var sessionId = document.getElementById('modifyId').value;
-			console.log(sessionId);
 			if(confirm("정말로 회원탈퇴를 하시겠습니까?") == true){
 				location.href='delete-controller?delId='+sessionId;
 				location.href="delete";
@@ -49,11 +47,8 @@ border-radius: 12px 12px / 12px 12px;
 				document.getElementById('modifyPwChk').value="";
 				document.getElementById('modifyPw').focus();
 			}
-			
 		}
-	
 	</script>
-
 </head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/static/css/agency.min.css?ver=1.2.22" >
 
@@ -111,7 +106,7 @@ border-radius: 12px 12px / 12px 12px;
 			
 			
 			<button class="orange_btn" 
-			type="button" id="modify-btn" style="width:40%; align-self: center;" onclick="submitform()"> 정보 수정 
+			type="button" id="modify-btn" style="width:40%; align-self: center;" onclick="submitform();"> 정보 수정 
 			</button>&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="orange_btn" 
 			type="button" id="delete-btn" style="width:40%; align-self: center;" onclick="deletechk();"> 회원 탈퇴 

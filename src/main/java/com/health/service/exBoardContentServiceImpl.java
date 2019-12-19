@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.health.dao.exBoardDAO;
-@Repository
+@Service
 public class exBoardContentServiceImpl implements exBoardService{
 
 	@Autowired

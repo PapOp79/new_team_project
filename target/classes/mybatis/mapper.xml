@@ -119,15 +119,28 @@
 	<select id="boardList" resultType="Bdto">
   		select * from board order by num desc
   	</select>
+	
+	<select id="boardsearch" resultType="Bdto" parameterType="map">
+  		select * from board where ${title} like '%'||#{content}||'%' order by num desc
+  	</select>
   	
   	<select id="boardview" resultType="Bdto">
   		select * from board where num=#{num}
   	</select>
+
+  	<update id="hitup" parameterType="int">
+  		update board set hit=hit+1 where num=#{num}
+  	</update>
   	
-  	
-
-
-
-  </mapper>
-  
-  
+  	<insert id="boardcontentup" parameterType="Bdto">
+        insert into board (num, hit, secret, title, name, content, postdate) values(board_seq.nextval, 0, #{secret}, #{title}, #{name}, #{content}, sysdate)
+    </insert>
+    
+    <delete id="boardcontentdel" parameterType="int">
+     	delete from board where num=#{num} 
+    </delete>
+    
+    <update id="boardmodifychk" parameterType="Bdto">
+     	update board set name=#{name},title=#{title},content=#{content} where num=#{num}
+    </update>
+</mapper>

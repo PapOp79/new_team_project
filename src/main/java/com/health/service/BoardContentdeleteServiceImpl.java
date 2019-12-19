@@ -11,16 +11,17 @@ import org.springframework.ui.Model;
 import com.health.dao.boardDAO;
 
 @Service
-public class BoardViewServiceImpl implements BoardService{
+public class BoardContentdeleteServiceImpl implements BoardService{
 	@Autowired
-	public boardDAO dao;
+	private boardDAO dao;
+	
 	@Override
 	public int execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		int num = Integer.parseInt(request.getParameter("num"));
-		dao.hitup(num);
-		model.addAttribute("boardview", dao.boardview(num));
+		System.out.println(request.getParameter("num"));
+		
+		dao.boardcontentdel(Integer.parseInt(request.getParameter("num")));
 		return 0;
 	}
 }
