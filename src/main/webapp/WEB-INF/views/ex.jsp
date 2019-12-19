@@ -1,31 +1,23 @@
 <%@page import="org.apache.ibatis.ognl.SetPropertyAccessor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script
-	src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
+<!DOCTYPE html>
+<html>
+<head>	
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://mattstow.com/experiment/responsive-image-maps/jquery.rwdImageMaps.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%
-	request.setCharacterEncoding("UTF-8");
+<%request.setCharacterEncoding("UTF-8");%>
+<!--      모달 창 띄우기를 스크립트 함수로 실행시켜보자        -->
+<script type="text/javascript">
 
 	
-%>
-
-
-
-
-<!--      모달 창 띄우기를 스크립트 함수로 실행시켜보자        -->
-
-<script>
-
-
-
-
-	var num;
 	var hidden = false;
+
+	
 	function startpage() {
 		document.getElementById('bbbb').style.display = 'none';
 	}
@@ -41,6 +33,11 @@
 			document.getElementById('aaaa').style.display = 'inline';
 	}}
 	
+	function exboard_content(){
+		
+		$("#exboard_content").modal();
+		alert("실행");
+	}
 
 
 	
@@ -70,7 +67,12 @@ body {
 	background-position: left;
 	background-size: cover;
 }
+
+
 </style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
 
 
 <body style="background-color: #111111;" onload="startpage()">
@@ -114,6 +116,7 @@ body {
 	</div>
 </body>
 <!-- 모달 영역 -->
+<c:set var="num" value="2"/>
 <!-- 글 보기 -->
 <div class="modal fade" id="exboard_content" tabindex="-1" role="dialog"
 	style="background: none; top: 20%; color: #ff7f00;">
@@ -125,7 +128,7 @@ body {
 			</div>
 			<div class="modal-body">
 
-				<c:forEach items="${exBoardContent}" var="Edto">
+				<c:forEach items="${exList}" var="Edto">
 					<c:if test="${Edto.num eq num}">
 						<table border="1" style="background-color: #ffffff;">
 							<tr>
@@ -245,8 +248,9 @@ body {
 								<c:if test="${Edto.part == 1 }">
 								
 								<tr>
-								<td height="30">${Edto.name}${Edto.num}</td>
-									<td height="30"><a href="#exboard_content" 
+								
+								<td height="30">${Edto.name}</td>
+									<td height="30"><a href="#exboard_content" data-whatever="${Edto.num }" 
 											data-toggle="modal" data-dismiss="modal">${Edto.title}</a></td>
 										<td height="30">${Edto.savedate }</td>
 									</tr>
@@ -358,7 +362,10 @@ body {
 <div style="position: fixed; bottom: 60px; margin-left: 30PX;">
 	<%@ include file="include/footer.jspf"%>
 </div>
+</body>
 
+
+</html>
 
 
 

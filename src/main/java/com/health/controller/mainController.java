@@ -40,7 +40,7 @@ public class mainController {
 	public String ex(HttpServletRequest request, Model model) {
 		eboard = (exBoardListServiceImpl)applicationContext.getBean("exBoardListServiceImpl");
 		eboard.execute(model);
-		return "ex";
+		return "ex1";
 	}
 	
 
