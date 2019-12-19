@@ -24,7 +24,7 @@
 	<c:set var="totalPage" value="${dao.getTotalPage() }"/>
 	
 	
-	<h1>회원목록</h1>
+	<h1>회원목록1</h1>
 	
 		<table class="table table-striped table-dark">
 			<thead>

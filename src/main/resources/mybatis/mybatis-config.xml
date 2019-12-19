@@ -13,14 +13,20 @@
   	<typeAliases>
   		<typeAlias type="com.health.dto.userDTO" alias="Udto" />
   		<typeAlias type="com.health.dao.userDAO" alias="Udao" />
+  		
   		<typeAlias type="com.health.dao.lockerDAO" alias="Ldao" />
   		<typeAlias type="com.health.dto.lockerDTO" alias="Ldto" />
 
+
+  		
+  		<typeAlias type="com.health.dto.boardDTO" alias="Bdto" />
+  		<typeAlias type="com.health.dao.boardDAO" alias="Bdao" />
+  		
   		
 
   		<typeAlias type="com.health.dto.ticketDTO" alias="Tdto" />
   		<typeAlias type="com.health.dao.ticketDAO" alias="Tdao" />
-
+  		<typeAlias type="com.health.dto.ticketBuyerDTO" alias="TBdto" />
 
 		<typeAlias type="com.health.dto.exBoardDTO" alias="Edto" />
 		<typeAlias type="com.health.dao.exBoardDAO" alias="Edao" />

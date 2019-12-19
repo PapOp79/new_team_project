@@ -24,7 +24,7 @@ color:white;
    <%@ include file="include/header.jspf" %>
    
    
-   <div id="register_div" style="background-color: rgba(17,17,17,0.8); width:1200px; height:1000px; border-color: #fe6000; border-style:double; 
+   <div id="register_div" style="background-color: rgba(17,17,17,0.8); width:80%; height:80%; border-color: #fe6000; border-style:double; 
 	position: absolute; top:50%; left:50%; margin-top:-500px; margin-left:-600px;">
    
    <h4 class="modal-title" style="font-family:dohyun; color:white; margin-left:15%; margin-top:5%;">
@@ -169,7 +169,7 @@ color:white;
                required = "required" aria-required = "true" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             여&nbsp;&nbsp;<input type = "radio" name = "userSex" id = "userSex" value = "female"
                style = "margin-bottom: 25px; border: 1px solid #d9d9de"
-               required = "required" aria-required = "treu"></p></td>
+               required = "required" aria-required = "true"></p></td>
          </tr>
          
          <tr>

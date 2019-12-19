@@ -5,5 +5,8 @@
 	
 	<bean id="LoginService" class="com.health.service.LoginService"/>
 	<bean id="LockerService" class="com.health.service.LockerService"/>
+	<bean id="BoardService" class="com.health.service.BoardService"/>
+	<bean id="ExBoardService" class="com.health.service.exBoardService"/>
+	<bean id="TicketService" class="com.health.service.TicketService"/>
 
 </beans>

@@ -1,6 +1,10 @@
 package com.health.service;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +22,10 @@ public class ticketListViewServiceImpl implements TicketService{
 	
 	@Override
 	public int execute(Model model) {
+		Map<String, Object> map = model.asMap();
+	    HttpServletRequest request = (HttpServletRequest) map.get("request");
 		model.addAttribute("ticketlist", dao.ticketList());
+		
 		return 0;
 	}
 

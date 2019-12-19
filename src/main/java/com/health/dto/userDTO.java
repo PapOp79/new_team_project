@@ -13,6 +13,9 @@ public class userDTO {
 	private int userHeight;
 	private int userWeight;
 	private String userSex;
+	private int ticket;
+	private int Admin;
+	
 @Override
 	public String toString() {
 		return "userDTO [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userEmail="
@@ -21,12 +24,22 @@ public class userDTO {
 	}
 	//	private String userExperience;
 //	private String userPurpose;
-	private int Admin;
 	
-	
+
+
+
+
 	public String getUserId() {
 		return userId;
 	}
+	public int getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(int ticket) {
+		this.ticket = ticket;
+	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}

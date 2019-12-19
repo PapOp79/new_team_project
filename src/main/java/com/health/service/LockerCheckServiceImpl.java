@@ -32,7 +32,7 @@ public class LockerCheckServiceImpl implements LockerService{
 		}else if(lockerCheck == 1) {
 			return checkOK;
 		}else {
-			System.out.println("락카 오류");
+			System.out.println("�씫移� �삤瑜�");
 		}
 		return 0;
 	}
