@@ -169,7 +169,7 @@ color:white;
                required = "required" aria-required = "true" checked="checked">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             여&nbsp;&nbsp;<input type = "radio" name = "userSex" id = "userSex" value = "female"
                style = "margin-bottom: 25px; border: 1px solid #d9d9de"
-               required = "required" aria-required = "treu"></p></td>
+               required = "required" aria-required = "true"></p></td>
          </tr>
          
          <tr>

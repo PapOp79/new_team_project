@@ -1,5 +1,6 @@
 package com.health.controller;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
@@ -41,9 +42,6 @@ public class mainController {
 		return "ex";
 	}
 	
-
-	
-
 	@RequestMapping("ticketPop")
 	public String ticketPop() {
 		return "ticketPop";
@@ -311,5 +309,55 @@ public class mainController {
 		   board.execute(model);
 			
 		   return "boardview";
+	   }
+	   
+	   @RequestMapping("boardcontent_upok")
+	   public String boardcontent_upok(Model model, HttpServletRequest request) {
+	      model.addAttribute("request",request);
+	      
+	      board = (BoardService) applicationContext.getBean("boardWriteContentServiceImpl");
+	      board.execute(model);
+	   
+	      return "redirect:board";
+	   }
+	   
+	   @RequestMapping("boardcontentdelete-controller")
+	   public String boardcontentdelete_controller(Model model, HttpServletRequest request) {
+		  model.addAttribute("request",request);
+			
+		  board = (BoardService) applicationContext.getBean("boardContentdeleteServiceImpl");
+		  board.execute(model);
+			
+		  return "redirect:boardview";
+	   }
+	   
+	   @RequestMapping("boardcontentdelete")
+	   public String boardcontentdelete() {
+		   return "boardcontentdelete";
+	   }
+	   
+	   @RequestMapping("boardmodify")
+	   public String boardmodify() {
+		   return "boardmodify";
+	   }
+	   
+	   @RequestMapping("boardmodifychk")
+	   public String boardmodifychk(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+			
+		   board = (BoardService) applicationContext.getBean("boardModifyCheckServiceImpl");
+		   board.execute(model);
+			
+		   return "redirect:board";
+	   }
+	   
+	   @RequestMapping("searchchk")
+	   public String searchchk(Model model, HttpServletRequest request) {
+		   model.addAttribute("request", request);
+		   
+		   board = (BoardService) applicationContext.getBean("boardSearchCheckServiceImpl");
+		   board.execute(model);
+		   
+		   return "boardsearch";
 	   }
 }

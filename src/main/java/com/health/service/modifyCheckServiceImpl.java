@@ -40,10 +40,10 @@ public class modifyCheckServiceImpl implements LoginService {
 		
 		if(rn == 1) {
 			userDTO user = dao.getMemberInfo(request.getParameter("modifyId").trim());
-			HttpSession session = request.getSession();		
+			HttpSession session = request.getSession();
 			session.setAttribute("user_name", user.getUserName());
 			return 1;
 		}
-		return 0;	
+		return 0;
 	}
 }

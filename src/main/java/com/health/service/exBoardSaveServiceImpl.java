@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import com.health.dao.exBoardDAO;
 import com.health.dto.exBoardDTO;
 
-@Repository
+@Service
 public class exBoardSaveServiceImpl implements exBoardService{
 
 	
