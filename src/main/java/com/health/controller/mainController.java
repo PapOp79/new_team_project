@@ -1,5 +1,8 @@
 package com.health.controller;
 
+
+import java.util.Map;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.health.dao.userDAO;
@@ -42,7 +46,7 @@ public class mainController {
 	public String ex(HttpServletRequest request, Model model) {
 		eboard = (exBoardListServiceImpl)applicationContext.getBean("exBoardListServiceImpl");
 		eboard.execute(model);
-		return "ex";
+		return "ex1";
 	}
 	
 	@RequestMapping("ticketPop")
@@ -289,7 +293,7 @@ public class mainController {
 	 			model.addAttribute("request",request);
 	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
 	 			eboard.execute(model);
-	 			return "exModal/exModal";
+	 			return "redirect:ex";
 	 		}
 	   
 	   // ===================게시판======================
