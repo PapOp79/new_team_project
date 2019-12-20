@@ -290,7 +290,7 @@ public class mainController {
 	 			model.addAttribute("request",request);
 	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
 	 			eboard.execute(model);
-	 			return "exModal/exModal";
+	 			return "redirect:ex";
 	 		}
 	   
 	   // ===================게시판======================

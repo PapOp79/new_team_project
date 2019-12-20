@@ -52,23 +52,20 @@ function change() {
 }}
 function numInsert(num1){
 	num10 = num1;
-	
+
+}
 
 </script>
-<c:set var="num" value="${Edto.num }"/>
-<script type="text/javascript">}</script>
-
-
-
+<c:set var="num" value="3"></c:set>
 </head>
 <body style="background-color: #111111;">
+
 	<%@ include file="include/header.jspf"%>
 	<div style="margin-left: 123px;">
 		<h1
 			style="font-family: dohyun; margin-left: 30px; margin-top: 30px; color: white;">운동법
 			게시판</h1>
 	</div>
-
 	<hr style="border: solid 4px white;">
 	<div align="center" style="position: relative;">
 		<button type="button" onClick="change();">전환</button>
@@ -99,13 +96,10 @@ function numInsert(num1){
 			</div>
 		</div>
 	</div>
-	
-</body>
-
-
 <div style="position: fixed; bottom: 60px; margin-left: 30PX;">
 	<%@ include file="include/footer.jspf"%>
 </div>
+</body>
 <!-- 모달 영역 -->
 <!-- 앞모습  -->
 <!-- Button trigger modal -->
@@ -120,7 +114,7 @@ function numInsert(num1){
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-			</div>
+				</div>
 			<div class="modal-body">
 				<table border="1" align="center"
 					style="background-color: white; color: black; font-family: dohyun;">
@@ -130,14 +124,11 @@ function numInsert(num1){
 						<td width="90" height="30" align="center">작성일</td>
 						<c:forEach items="${exList}" var="Edto">
 							<c:if test="${Edto.part == 1 }">
-						
+					
 								<tr>
-									<td height="30">${Edto.name}</td>
-									
-									<td height="30"><a href="#exboard_content" onclick="numInsert(${Edto.num})" data-toggle="modal"
-										data-dismiss="modal"
-										
-										>${Edto.title}</a></td>
+									<td height="30">${Edto.name}/${Edto.num}</td>
+									<td height="30"><a href="#exboard_content"  onclick="numInsert(${Edto.num})" data-toggle="modal" data-whatever="${Edto.num}" 
+									data-dismiss="modal">${Edto.title}</a></td>
 									<td height="30">${Edto.savedate }</td>
 								</tr>
 							</c:if>
@@ -161,6 +152,8 @@ function numInsert(num1){
 	</div>
 </div>
 
+
+	
 <!-- 글 보기 -->
 <div class="modal fade" id="exboard_content" tabindex="-1" role="dialog" data-backdrop="static"
 	style="background: none; top: 20%; color: #ff7f00;">
@@ -171,12 +164,11 @@ function numInsert(num1){
 				<h4 class="modal-title" id="myModalLabel">게시글</h4>
 			</div>
 			<div class="modal-body">
-	       
 				<c:forEach items="${exList}" var="Edto">
-				
 					<c:if test="${Edto.num eq num}">
-						<table border="1" style="background-color: #ffffff;">
+							<table border="1" style="background-color: #ffffff;">
 							<tr>
+						
 								<td width="60" height="30" align="center">작성자</td>
 								<td width="120">${Edto.name}</td>
 								<td width="60" height="30" align="center">제목</td>
@@ -186,10 +178,8 @@ function numInsert(num1){
 								<td height="30" colspan="4" align="center">내용</td>
 							</tr>
 							<tr>
-
 								<td height="310" colspan="4" align="center">${Edto.content}</td>
 							</tr>
-
 							<tr>
 								<td colspan="4"><input type="submit" value="수정">
 									&nbsp;&nbsp; <a href="list">목록보기</a> &nbsp;&nbsp; <a
