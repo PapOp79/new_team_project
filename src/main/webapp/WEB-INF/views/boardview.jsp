@@ -46,6 +46,41 @@
 		</c:if>
 	</div>
 	</form>
+	
+	<hr style="color:white; width:80%; border:solid;">
+	
+	
+	<div>
+	<form action="commentregister" method="post">
+	<table style="border:double; border-color: #fe6000; position:absolute; top:80%; left: 20%;">
+		<tr>
+			<td><input type="text" class="gray_textbox" id="commentId" name="commentId" readonly="readonly" value="${sessionScope.user_id}"></td>
+			<td>
+			<input type = radio name = "commentsecret" value="1">&nbsp;비밀댓글&nbsp;&nbsp;&nbsp;
+			<input type = radio name = "commentsecret" value="0" checked = "checked">&nbsp;공개 댓글
+			</td>
+			<td> <textarea rows="3" cols="60" name="commentation" id="commentation" class="gray_textbox" style="width:800px; height:150px;"></textarea> </td>
+			<td><input type="button" class="orange_btn" value="댓글 등록" onclick="form.submit()" style="width:150px; height:150px;"></td>
+			<td><input type="text" name="num"id="num" hidden="true" value="${boardview.num}"> </td>
+		</tr> 
+	</table>
+	</form>
+	
+	<table style="border:double; border-color: #fe6000; position:absolute; top:100%; left: 20%;">
+		<c:forEach var="Cdto" items="${Commentlist}">
+			<tr>
+			<td><input type="text" class="gray_textbox" value="${Cdto.commentId }" readonly="readonly"></td>
+			<td><textarea rows="3" cols="60" class="gray_textbox" readonly="readonly">${Cdto.commentation}</textarea></td>
+			<td><input type="text" class="gray_textbox" value="${Cdto.regdate }" readonly="readonly"></td>
+			</tr>
+		</c:forEach>
+	
+	</table>
+	
+
+	
+	</div>
+	
 </body>
 <div style="position: fixed; bottom: 60px; margin-left: 30PX;">
 	<%@ include file="include/footer.jspf" %>

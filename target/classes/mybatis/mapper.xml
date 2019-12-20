@@ -143,4 +143,16 @@
     <update id="boardmodifychk" parameterType="Bdto">
      	update board set name=#{name},title=#{title},content=#{content} where num=#{num}
     </update>
+     	
+     	<!--  ===================게시판 댓글 ======================= -->
+    <insert id="commentregister" parameterType="Cdto">
+        insert into commentDB (boardnum, commentid, commentation, regdate, commentsecret) values(#{boardnum},#{commentId},#{commentation},sysdate, #{commentsecret})
+    </insert> 	
+     	
+     	
+    <select id="commentlist" resultType="Cdto">
+    	select * from commentDB where boardnum=#{num}
+    </select>	
+     	 
+     	
 </mapper>

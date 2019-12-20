@@ -22,6 +22,8 @@
   		<typeAlias type="com.health.dto.boardDTO" alias="Bdto" />
   		<typeAlias type="com.health.dao.boardDAO" alias="Bdao" />
   		
+  		<typeAlias type="com.health.dto.commentDTO" alias="Cdto" />
+  		<typeAlias type="com.health.dao.commentDAO" alias="Cdao" />
   		
 
   		<typeAlias type="com.health.dto.ticketDTO" alias="Tdto" />

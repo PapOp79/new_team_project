@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.health.dto.boardDTO;
-import com.health.dto.userDTO;
 
 @Repository
 public class boardDAO {
@@ -40,7 +39,7 @@ public class boardDAO {
 		return sqlSession.update(namespace + ".boardmodifychk", Bdto);
 	}
 
-	// °Ë»ö
+	// ï¿½Ë»ï¿½
 	public List<boardDTO> boardsearch(boardDTO Bdto) {
 		return sqlSession.selectList(namespace + ".boardsearch", Bdto);
 	}
