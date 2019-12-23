@@ -90,6 +90,21 @@
 					onclick="writechk()"></td>
 			</tr>
 			<tr>
+				<td colspan="4">
+					<div style = "font-family: dohyun; color: white;" align = "center">
+						<c:choose>
+							<c:when test="${param.start == null}"><!-- start값 만들어주기 -->
+								<c:set var = "start" value = "1" scope = "session" />
+							</c:when>
+							<c:otherwise>
+								<c:set var = "start" value="${param.start}" scope = "session" /> <!-- 링크 클릭시 start값을 그대로 받음 -->
+							</c:otherwise>
+						</c:choose>
+							<c:forEach begin = "1" end="${pc.totEndPage}" step = "1" var = "cnt">
+								<a href = "board?start=${cnt}">[${cnt}]</a><!-- 계산해서 페이지 번호 나타내기 -->
+							</c:forEach>		
+						${start}/${pc.totEndPage}<!-- 전체 페이지 -->
+					</div>
 				<td colspan="5">
 					<form action="searchchk">
 						<select name="searchtype">
@@ -103,10 +118,23 @@
 
 					</form>
 				</td>
+				<td align = "right"><input type="button" value="글작성" onclick="writechk()"></td>
+			</tr>
+			<tr>
+				<td colspan="5"> 
+					<form action="searchchk">
+						<select name="searchtype">
+							<option value="title">제목</option>
+							<option value="name">이름</option>
+							<option value="content">내용</option>
+						</select> &nbsp;&nbsp;&nbsp;
+						<input type="text" class="gray_textbox" name="value" style="width:500px;">&nbsp;&nbsp;&nbsp;
+						<input type="button" class="orange_btn" value="검색" style="width:80px;" onclick="form.submit()">
+					</form>
+				</td>
 			</tr>
 		</table>
 	</div>
-
 </body>
 <div style="position: fixed; bottom: 60px; margin-left: 30PX;">
 	<%@ include file="include/footer.jspf"%>

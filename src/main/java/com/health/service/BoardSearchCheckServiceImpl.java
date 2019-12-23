@@ -25,8 +25,6 @@ public class BoardSearchCheckServiceImpl implements BoardService{
 		
 		Bdto.setTitle(request.getParameter("searchtype"));
 		Bdto.setContent(request.getParameter("value"));
-		System.out.println(Bdto.getTitle());
-		System.out.println(Bdto.getContent());
 		
 		model.addAttribute("boardList", dao.boardsearch(Bdto));
 		

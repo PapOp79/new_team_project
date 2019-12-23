@@ -116,8 +116,8 @@
 	</select>
 
 	<!-- ==============게시판============== -->
-	<select id="boardList" resultType="Bdto">
-  		select * from board order by num desc
+	<select id="boardList" parameterType="Pdto" resultType="Bdto">
+  		 select B.* from(select rownum rn, A.* from (select * from board order by num desc)A)B where rn between #{startPage} and #{endPage}
   	</select>
 	
 	<select id="boardsearch" resultType="Bdto" parameterType="map">
@@ -143,16 +143,17 @@
     <update id="boardmodifychk" parameterType="Bdto">
      	update board set name=#{name},title=#{title},content=#{content} where num=#{num}
     </update>
+    
+    <select id="boardgetTotalPage" resultType="int">
+      select count(*) from board
+    </select>
      	
      	<!--  ===================게시판 댓글 ======================= -->
     <insert id="commentregister" parameterType="Cdto">
         insert into commentDB (boardnum, commentid, commentation, regdate, commentsecret) values(#{boardnum},#{commentId},#{commentation},sysdate, #{commentsecret})
     </insert> 	
-     	
-     	
+     	    	
     <select id="commentlist" resultType="Cdto">
     	select * from commentDB where boardnum=#{num}
-    </select>	
-     	 
-     	
+    </select>	  	
 </mapper>

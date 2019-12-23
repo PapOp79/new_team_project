@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.health.dto.boardDTO;
+import com.health.dto.boardpagingDTO;
 
 @Repository
 public class boardDAO {
@@ -15,8 +16,8 @@ public class boardDAO {
 	
 	private static final String namespace = "com.health.mybatis.myMapper"; 
 	
-	public List<boardDTO> boardlist() {
-		return sqlSession.selectList(namespace + ".boardList");
+	public List<boardDTO> boardlist(boardpagingDTO Pdto) {
+		return sqlSession.selectList(namespace + ".boardList", Pdto);
 	}
 	
 	public boardDTO hitup(int num) {
@@ -39,17 +40,15 @@ public class boardDAO {
 		return sqlSession.update(namespace + ".boardmodifychk", Bdto);
 	}
 
-	// �˻�
 	public List<boardDTO> boardsearch(boardDTO Bdto) {
 		return sqlSession.selectList(namespace + ".boardsearch", Bdto);
 	}
 	
-//	public List<boardDTO> boardsearchbyName(String searchName) {
-//		return sqlSession.selectList(namespace + ".boardsearchbyName", searchName);
-//	}
-//	
-//	public List<boardDTO> boardsearchbyContent(String searchContent) {
-//		System.out.println("searchContent = " + searchContent);
-//		return sqlSession.selectList(namespace + ".boardsearchbyContent", searchContent);
-//	}
+	public int getTotalPage() {
+		return sqlSession.selectOne(namespace + ".boardgetTotalPage");
+	}
+	
+	public List<boardDTO> paginglist(boardpagingDTO pc){
+		return sqlSession.selectList(namespace + ".boardpagingList", pc);
+	}
 }

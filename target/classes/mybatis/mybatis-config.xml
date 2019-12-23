@@ -25,6 +25,7 @@
   		<typeAlias type="com.health.dto.commentDTO" alias="Cdto" />
   		<typeAlias type="com.health.dao.commentDAO" alias="Cdao" />
   		
+  		<typeAlias type="com.health.dto.boardpagingDTO" alias="Pdto" />
 
   		<typeAlias type="com.health.dto.ticketDTO" alias="Tdto" />
   		<typeAlias type="com.health.dao.ticketDAO" alias="Tdao" />
