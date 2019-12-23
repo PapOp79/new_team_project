@@ -22,7 +22,7 @@
   		<typeAlias type="com.health.dto.boardDTO" alias="Bdto" />
   		<typeAlias type="com.health.dao.boardDAO" alias="Bdao" />
   		
-  		
+  		<typeAlias type="com.health.dto.boardpagingDTO" alias="Pdto" />
 
   		<typeAlias type="com.health.dto.ticketDTO" alias="Tdto" />
   		<typeAlias type="com.health.dao.ticketDAO" alias="Tdao" />

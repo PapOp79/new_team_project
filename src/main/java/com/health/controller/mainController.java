@@ -295,9 +295,11 @@ public class mainController {
 	   
 	   // ===================게시판======================
 	   @RequestMapping("board")
-	   public String board(Model model) {
+	   public String board(Model model, HttpServletRequest request) {
+		   model.addAttribute("request", request);
 		   board = (BoardService) applicationContext.getBean("boardListServiceImpl");
 		   board.execute(model);
+		   
 		   return "board";
 	   }
 	   
