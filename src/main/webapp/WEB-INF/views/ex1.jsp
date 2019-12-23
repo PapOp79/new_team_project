@@ -155,7 +155,7 @@ function numInsert(num1){
 							</c:if>
 						</td>
 					</tr>
-				</table>
+				</table> 
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal"
