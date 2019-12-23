@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.health.dao.userDAO;
 import com.health.service.BoardService;
+import com.health.service.CommentService;
 import com.health.service.LockerService;
 import com.health.service.LoginService;
 import com.health.service.TicketService;
 import com.health.service.exBoardService;
+
 import com.health.service.exBoardListServiceImpl;
 
 @Controller
@@ -32,6 +34,7 @@ public class mainController {
 	private TicketService ts;
 	private BoardService board;
 	private exBoardService eboard;
+	private CommentService comment;
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
 	@RequestMapping("index")
@@ -290,7 +293,7 @@ public class mainController {
 	 			model.addAttribute("request",request);
 	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
 	 			eboard.execute(model);
-	 			return "exModal/exModal";
+	 			return "redirect:ex";
 	 		}
 	   
 	   // ===================게시판======================
@@ -366,4 +369,17 @@ public class mainController {
 		   
 		   return "boardsearch";
 	   }
+	   
+	   //=============================댓글=======================================
+	   
+	   @RequestMapping("commentregister")
+	   public String commentregister(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   
+		   comment = (CommentService) applicationContext.getBean("commentRegisterServiceImpl");
+		   comment.execute(model);
+			
+		   return "index";
+	   }
+	   
 }
