@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style type="text/css">
 .wrap {
@@ -36,6 +36,11 @@ body {
 	background-position: left;
 	background-size: cover;
 }
+.modalbody{
+background-color: #000000; 
+background-color: rgba(0, 0, 0, 0.8); 
+color: white;
+}
 </style>
 <script type="text/javascript">
 var num10;
@@ -52,11 +57,17 @@ function change() {
 }}
 function numInsert(num1){
 	num10 = num1;
-
+	
+	
 }
 
+
+
 </script>
-<c:set var="num" value="3"></c:set>
+
+
+
+
 </head>
 <body style="background-color: #111111;">
 
@@ -66,6 +77,9 @@ function numInsert(num1){
 			style="font-family: dohyun; margin-left: 30px; margin-top: 30px; color: white;">운동법
 			게시판</h1>
 	</div>
+	
+
+
 	<hr style="border: solid 4px white;">
 	<div align="center" style="position: relative;">
 		<button type="button" onClick="change();">전환</button>
@@ -102,7 +116,6 @@ function numInsert(num1){
 </body>
 <!-- 모달 영역 -->
 <!-- 앞모습  -->
-<!-- Button trigger modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static"
 	aria-labelledby="myModalLabel" aria-hidden="true" style="top: 20%;">
 	<div class="modal-dialog" role="document">
@@ -126,9 +139,9 @@ function numInsert(num1){
 							<c:if test="${Edto.part == 1 }">
 					
 								<tr>
-									<td height="30">${Edto.name}/${Edto.num}</td>
-									<td height="30"><a href="#exboard_content"  onclick="numInsert(${Edto.num})" data-toggle="modal" data-whatever="${Edto.num}" 
-									data-dismiss="modal">${Edto.title}</a></td>
+									<td height="30">${Edto.name}</td>
+									<td height="30"><a href="#exboard_content" onclick="<c:set var="num">${Edto.num }</c:set>"  data-toggle="modal" data-id="${Edto.num}" 
+									data-dismiss="modal" >${Edto.title}</a></td>
 									<td height="30">${Edto.savedate }</td>
 								</tr>
 							</c:if>
