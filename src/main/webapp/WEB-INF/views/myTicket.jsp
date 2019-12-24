@@ -26,8 +26,6 @@
     <h5 class="card-title">${TBdto.ticketDuration}개월 권</h5>
     <h6 class="card-subtitle mb-2 text-muted">${TBdto.ticketStartDate} ~ ${TBdto.ticketEndDate}.</h6>
     <p class="card-text">열심히 운동하였으므로 이 회원권을 수상함</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
   </div>
 </div>
 			</c:forEach>
