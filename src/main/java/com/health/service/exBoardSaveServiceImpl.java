@@ -1,5 +1,9 @@
 package com.health.service;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +32,29 @@ public class exBoardSaveServiceImpl implements exBoardService{
 		dto.setTitle(request.getParameter("title"));
 		dto.setContent(request.getParameter("content"));
 		dto.setPart(Integer.parseInt(request.getParameter("part")));
+		
+		String str = request.getParameter("link");
+		
+		String[] you = str.split("/");
+		
+		int size = you.length-1;
+		
+		String y = "https://youtube.com/embed/"+you[size];
+		
+		try { 
+			Desktop.getDesktop().browse(new URI(y)); 
+		} catch (IOException e) { e.printStackTrace(); 
+		} catch (URISyntaxException e) { e.printStackTrace(); }
+		
+	
+		
+		
+		dto.setLink(y);
+		
+		
+		
+		
+		
 		dao.exBoard_write(dto);
 		
 	}

@@ -9,6 +9,7 @@ private String content;
 private Timestamp savedate;
 private int part;
 private int num;
+private String link;
 
 private int pageIndex = 1;
 private int pageSize = 10;
@@ -17,6 +18,12 @@ private int pageGroupSize = 3;
 
 
 
+public String getLink() {
+	return link;
+}
+public void setLink(String link) {
+	this.link = link;
+}
 public int getPageIndex() {
 	return pageIndex;
 }

@@ -288,13 +288,16 @@ public class mainController {
 			eboard.execute(model);
 			return "redirect:ex";
 		}
-	   @RequestMapping("exboard_content")
-	 		public String content(HttpServletRequest request,Model model){
-	 			model.addAttribute("request",request);
-	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
-	 			eboard.execute(model);
-	 			return "redirect:ex";
-	 		}
+	 
+	   
+	   @RequestMapping("exBoardContent")
+	   public String modal(HttpServletRequest request,Model model) {
+		   System.out.println("exboardcontent 실행");
+		   eboard = (exBoardService)applicationContext.getBean("exBoardContentServiceImpl");
+			eboard.execute(model);
+			
+		   return "ex1";
+	   }
 	   
 	   // ===================게시판======================
 	   @RequestMapping("board")

@@ -108,7 +108,7 @@
 	</select>
 	
 	<insert id="exboardwrite" parameterType="Edto">
-		insert into exBoard(name,title,content,savedate,part,num) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard))
+		insert into exBoard(name,title,content,savedate,part,num,link) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard),#{link})
 	</insert>
 
 	<select id="exBoardContent" resultType="Edto">
