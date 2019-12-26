@@ -12,15 +12,19 @@
 
 </head>
 <body style="background-color: #111111">
-	<h1> MyTicket.jsp</h1>
+	<div style="margin-left: 123px;">
+		<h1	style="font-family: dohyun; margin-left: 30px; margin-top: 30px; color: white;">회원권 구매 관리</h1>
+	</div>
+	<div>
+		<hr	style="width: 420px; color: white; border: solid; margin-left: 0px;">
+	</div>
 	
 	<c:choose>
-		<c:when test="${myTicketlist eq null}">
-			<h1> 내가 보유한 회원권이 없습니다</h1>
+		<c:when test="${empty myTicketlist}">
+			<h1	style="font-family: dohyun; margin-left: 30px; margin-top: 30px; color: white;"> 내가 보유한 회원권이 없습니다</h1>
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="TBdto" items="${myTicketlist}">
-			
 			<div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${TBdto.ticketDuration}개월 권</h5>
@@ -34,6 +38,6 @@
 	
 	
 	
-	<a href="index"> 홈으로</a>
+	<a href="ticketView"><span style="font-family: dohyun; margin-left: 30px; margin-top: 30px; color: white;"> 회원권 구매하러 가기~</span></a>
 </body>
 </html>

@@ -37,7 +37,7 @@ public class ticketRegisterServiceImpl implements TicketService{
 		TBdto.setTicketBuyerId(request.getParameter("sessionId"));
 		TBdto.setTicketBuyerName(request.getParameter("sessionName"));
 		TBdto.setTicketPrice(Integer.parseInt(request.getParameter("ticketPrice")));
-		TBdto.setTicketDuration(Integer.parseInt(request.getParameter("ticketDuration")));
+		TBdto.setTicketDuration(Integer.parseInt(request.getParameter("ticketDuration").trim()));
 		
 		// get date ---------------------------------------------------------------
 		
@@ -68,7 +68,8 @@ public class ticketRegisterServiceImpl implements TicketService{
 			int result = dao.registerTicket(TBdto);
 			
 			if(result == 1) {
-				int user_result = Udao.updateTicket(TBdto.getTicketBuyerId());
+				System.out.println("test : "+request.getParameter("sessionId"));
+				int user_result=Udao.updateTicket(request.getParameter("sessionId").trim());
 				if(user_result == 1) {
 					return 1;
 				}else {return 0;}

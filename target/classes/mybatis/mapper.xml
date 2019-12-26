@@ -26,7 +26,7 @@
 	  </update>
 	  
      <update id="updateTicket" parameterType="String">
-     	update userDB set Ticket=1 where userId=#{id} 
+     	update userDB set Ticket=1 where userId=#{id}
 	  </update>
 	  
      <update id="modifyCheck" parameterType="Udto">
