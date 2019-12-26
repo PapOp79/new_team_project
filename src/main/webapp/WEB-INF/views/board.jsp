@@ -105,6 +105,7 @@
 							</c:forEach>		
 						${start}/${pc.totEndPage}<!-- 전체 페이지 -->
 					</div>
+					<!-- 
 				<td colspan="5">
 					<form action="searchchk">
 						<select name="searchtype">
@@ -119,6 +120,7 @@
 					</form>
 				</td>
 				<td align = "right"><input type="button" value="글작성" onclick="writechk()"></td>
+					 -->
 			</tr>
 			<tr>
 				<td colspan="5"> 
