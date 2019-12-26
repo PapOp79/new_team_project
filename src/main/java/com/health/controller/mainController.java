@@ -266,7 +266,7 @@ public class mainController {
 	   ts.execute(model);
 //		   ts = (TicketService) applicationContext.getBean("ticketListViewServiceImpl");
 //		   ts.execute(model);
-		   return "ticketRegister";
+	   		return "redirect:myTicket";
 	   }
 	   
 	   @RequestMapping("myTicket")
