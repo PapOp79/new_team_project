@@ -15,6 +15,43 @@
 			return false;
 		}
 	}
+	
+	function commentlist(){
+		var num=<%=request.getParameter("num")%>
+		$.ajax({
+			url:'commentlist',
+			type:'GET',
+			data: {'num':num},
+			success : function(data){
+				var html=""
+				if(data>0){
+					for(i=0; i<data; i++ ){
+						html += "<div>";
+        	            html += "<div><table class='table'><h6><strong>123123123</strong></h6>";
+            	        html += "<tr><td>4444444</td></tr>";
+                	    html += "</table></div>";
+                    	html += "</div>";
+					}
+					
+				} else{
+					html += "<div>";
+	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+	                html += "</table></div>";
+	                html += "</div>";
+
+				}
+				 $("#commentList").html(html);
+				
+			},
+			error : function(){alert('fail!')}
+			
+			
+		});
+		
+	}
+	
+	
+	
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -51,22 +88,20 @@
 
 	<hr style="color: white; width: 80%; border: solid;">
 
-
 	<div>
-		<form action="commentregister" method="post">
+		<form method="post" id="boardcomment" action = "commentregister">
 			<table
-				style="border: double; border-color: #fe6000; position: absolute; top: 80%; left: 20%;">
+				style="border: double; border-color: #fe6000;">
 				<tr>
 					<td><input type="text" class="gray_textbox" id="commentId"
 						name="commentId" readonly="readonly"
 						value="${sessionScope.user_id}"></td>
 					<td><input type=radio name="commentsecret" value="1">&nbsp;비밀댓글&nbsp;&nbsp;&nbsp;
-						<input type=radio name="commentsecret" value="0" checked="checked">&nbsp;공개
-						댓글</td>
+						<input type=radio name="commentsecret" value="0" checked="checked">&nbsp;공개	댓글</td>
 					<td><textarea rows="3" cols="60" name="commentation"
 							id="commentation" class="gray_textbox"
-							style="width: 800px; height: 150px;"></textarea></td>
-					<td><input type="button" class="orange_btn" value="댓글 등록"
+							style="width: 800px; height: 150px;" placeholder="댓글을 입력하세요"></textarea></td>
+					<td><input type="button" class="orange_btn" id="comment_btn" value="댓글 등록"
 						onclick="form.submit()" style="width: 150px; height: 150px;"></td>
 					<td><input type="text" name="num" id="num" hidden="true"
 						value="${boardview.num}"></td>
@@ -74,40 +109,15 @@
 			</table>
 		</form>
 
-		<table
-			style="border: double; border-color: #fe6000; position: absolute; top: 100%; left: 20%;">
-			<c:forEach var="Cdto" items="${Commentlist}">
-				<tr>
-					<c:choose>
-						<c:when
-							test="${Cdto.commentId ne sessionScope.user_id && Cdto.commentsecret eq 1 && sessionScope.Admin eq 0}">
-							<td><input type="text" class="gray_textbox"
-								value="비밀 댓글입니다!" readonly="readonly">
-						</c:when>
-						<c:otherwise>
-							<td><input type="text" class="gray_textbox"
-								value="${Cdto.commentId }" readonly="readonly"></td>
-							<td><textarea rows="3" cols="60" class="gray_textbox"
-									readonly="readonly">${Cdto.commentation}</textarea></td>
-							<td><input type="text" class="gray_textbox"
-								value="${Cdto.regdate }" readonly="readonly"></td>
-							<c:if test="${Cdto.commentId  eq sessionScope.user_id}">
-								<td><input type="button" class="orange_btn" value="수정">&nbsp;
-									<input type="button" class="orange_btn" value="삭제">
-								<td>
-							</c:if>
-					</c:otherwise>
-					</c:choose>
-				</tr>
-			</c:forEach>
-
-		</table>
-
-
-
+		
 	</div>
-
+	<button type="button" onclick='commentlist()'> test </button>
+	<div id="commentList">
+	</div>
+	
 </body>
+
+
 <div style="position: fixed; bottom: 60px; margin-left: 30PX;">
 	<%@ include file="include/footer.jspf"%>
 </div>

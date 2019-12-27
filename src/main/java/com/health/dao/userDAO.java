@@ -152,8 +152,7 @@ public class userDAO {
 	public int getTotalPage() {
 	      return sqlSession.selectOne(namespace + ".getTotalPage");
 	   }
-	   
-	   
+	   	   
 	   public pageDTO pagingNum(int start) {
 	      System.out.println("start : "+start);
 	      if(start == 0)start=1;
