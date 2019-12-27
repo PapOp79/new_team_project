@@ -22,7 +22,7 @@ public List<exBoardDTO> exList(){
 public int exBoard_write(exBoardDTO dto) {
 		return sqlSession.insert(namespace+".exboardwrite",dto);
 }
-public exBoardDTO exBoard_Content(int num) {
+public List<exBoardDTO> exBoard_Content(int num) {
 	
 	return sqlSession.selectOne(namespace+".exboardcontent",num);
 }

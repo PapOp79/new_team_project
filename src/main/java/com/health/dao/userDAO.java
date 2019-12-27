@@ -137,7 +137,7 @@ public class userDAO {
 	}
 
 	public int updateTicket(String id) {
-		return sqlSession.selectOne(namespace + ".updateTicket", id);
+		return sqlSession.update(namespace + ".updateTicket", id);
 	}
 	
 	public List<userDTO> userList() { 

@@ -13,7 +13,6 @@ import com.health.dto.boardpagingDTO;
 public class boardDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	
 	private static final String namespace = "com.health.mybatis.myMapper"; 
 	
 	public List<boardDTO> boardlist(boardpagingDTO Pdto) {

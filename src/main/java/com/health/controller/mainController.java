@@ -89,7 +89,7 @@ public class mainController {
 	}
 	
 	@RequestMapping("mypagepwchk")
-	public String mypagepwchk(Model model, HttpServletRequest request) {
+	public String mypagepwchk(Model model, HttpServletRequest request) throws Exception {
 		model.addAttribute("request",request);
 		login = (LoginService) applicationContext.getBean("pwCheckServiceImpl");
 		int pwchksuccess = login.execute(model);
@@ -101,7 +101,7 @@ public class mainController {
 	}
 	
 	@RequestMapping("login-controller")
-	public String login_controller(Model model, HttpServletRequest request) {
+	public String login_controller(Model model, HttpServletRequest request) throws Exception {
 		model.addAttribute("request",request);
 		System.out.println("이거 로그인 " + request.getParameter("userId"));
 		System.out.println("이거 로그인 " + request.getParameter("userPw"));
@@ -113,7 +113,7 @@ public class mainController {
 	}
 
 	@RequestMapping("modify-controller")
-	public String modify_controller(Model model, HttpServletRequest request) {
+	public String modify_controller(Model model, HttpServletRequest request) throws Exception {
 		model.addAttribute("request",request);
 		System.out.println("userId12 = " + request.getParameter("modifyId"));
 		System.out.println("userPw12 = " + request.getParameter("modifyPw"));
@@ -125,7 +125,7 @@ public class mainController {
 	}
 
 	@RequestMapping("delete-controller")
-	public String delete_controller(Model model, HttpServletRequest request) {
+	public String delete_controller(Model model, HttpServletRequest request) throws Exception {
 		model.addAttribute("request",request);
 		
 		login = (LoginService) applicationContext.getBean("deleteCheckServiceImpl");
@@ -157,7 +157,7 @@ public class mainController {
 	   }
 	   
 	   @RequestMapping("join-controller")
-	   public String join_controller(Model model, HttpServletRequest request) {
+	   public String join_controller(Model model, HttpServletRequest request) throws Exception {
 	      model.addAttribute("request",request);
 	      
 	      login = (LoginService) applicationContext.getBean("joinCheckServiceImpl");
@@ -167,7 +167,7 @@ public class mainController {
 	   }
 	   
 	   @RequestMapping("userList")
-	   public String userList(Model model, HttpServletRequest request) {
+	   public String userList(Model model, HttpServletRequest request) throws Exception {
 		   model.addAttribute("request",request);
 		   login = (LoginService) applicationContext.getBean("userListServiceImpl");
 		   login.execute(model);
@@ -175,7 +175,7 @@ public class mainController {
 	   }
 	   
 	   @RequestMapping("trainerList")
-	   public String trainerList(Model model, HttpServletRequest request) {
+	   public String trainerList(Model model, HttpServletRequest request) throws Exception {
 		   model.addAttribute("request",request);
 		   login = (LoginService) applicationContext.getBean("trainerListServiceImpl");
 		   login.execute(model);
@@ -266,7 +266,7 @@ public class mainController {
 	   ts.execute(model);
 //		   ts = (TicketService) applicationContext.getBean("ticketListViewServiceImpl");
 //		   ts.execute(model);
-		   return "ticketRegister";
+	   		return "redirect:myTicket";
 	   }
 	   
 	   @RequestMapping("myTicket")
@@ -288,13 +288,16 @@ public class mainController {
 			eboard.execute(model);
 			return "redirect:ex";
 		}
-	   @RequestMapping("exboard_content")
-	 		public String content(HttpServletRequest request,Model model){
-	 			model.addAttribute("request",request);
-	 			eboard = (exBoardService) applicationContext.getBean("exBoardContentServiceImpl");
-	 			eboard.execute(model);
-	 			return "redirect:ex";
-	 		}
+	 
+	   
+	   @RequestMapping("exBoardContent")
+	   public String modal(HttpServletRequest request,Model model) {
+		   System.out.println("exboardcontent 실행");
+		   eboard = (exBoardService)applicationContext.getBean("exBoardContentServiceImpl");
+			eboard.execute(model);
+			
+		   return "ex1";
+	   }
 	   
 	   // ===================게시판======================
 	   @RequestMapping("board")

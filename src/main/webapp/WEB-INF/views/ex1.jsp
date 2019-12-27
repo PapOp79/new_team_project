@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style type="text/css">
 .wrap {
@@ -41,6 +41,40 @@ background-color: #000000;
 background-color: rgba(0, 0, 0, 0.8); 
 color: white;
 }
+
+textarea.exboardSave-nt { 
+cursor: auto;
+width:100%; 
+height:100%;
+
+resize: none; 
+text-align:center;
+vertical-align:middle;
+background-color:white;
+text-margin-top:auto; 
+margin-bottom:auto;
+border:0px;
+}
+
+textarea.exboardSave-ct { 
+cursor: auto;
+width:100%; 
+height:100%;
+min-height:100px;
+min-width:200px;
+resize: none; 
+text-align:center;
+vertical-align:middle;
+background-color:white;
+text-margin-top:auto; 
+margin-bottom:auto;
+border:0px;
+}
+
+.exboardSave1{
+text-align:center;
+
+}
 </style>
 <script type="text/javascript">
 var num10;
@@ -60,14 +94,7 @@ function numInsert(num1){
 	
 	
 }
-
-
-
 </script>
-
-
-
-
 </head>
 <body style="background-color: #111111;">
 
@@ -140,8 +167,14 @@ function numInsert(num1){
 					
 								<tr>
 									<td height="30">${Edto.name}</td>
-									<td height="30"><a href="#exboard_content" onclick="<c:set var="num">${Edto.num }</c:set>"  data-toggle="modal" data-id="${Edto.num}" 
-									data-dismiss="modal" >${Edto.title}</a></td>
+									<td height="30"><a data-target="#exboard_content" data-toggle="modal" 
+									data-content1="${Edto.name }"
+									data-content2="${Edto.title }"
+									data-content3="${Edto.content}"
+									data-content4="${Edto.link}"
+									 onclick='iframe("${Edto.link}")'
+									 data-dismiss="modal" >
+									${Edto.title}</a></td>
 									<td height="30">${Edto.savedate }</td>
 								</tr>
 							</c:if>
@@ -151,7 +184,7 @@ function numInsert(num1){
 							style="background-color: #000000; background-color: rgba(0, 0, 0, 0.8);">
 							<c:if test='${sessionScope.Admin eq 1 or sessionScope.Admin eq 2}'>
 								<a data-toggle="modal" data-target="#newText"
-									style="color: #ff7f00;" data-dismiss="modal">글작성 </a>
+									style="color: #ff7f00;"  data-dismiss="modal">글작성 </a>
 							</c:if>
 						</td>
 					</tr>
@@ -167,53 +200,7 @@ function numInsert(num1){
 
 
 	
-<!-- 글 보기 -->
-<div class="modal fade" id="exboard_content" tabindex="-1" role="dialog" data-backdrop="static"
-	style="background: none; top: 20%; color: #ff7f00;">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content"
-			style="background-color: #000000; background-color: rgba(0, 0, 0, 0.2); color: black;">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">게시글</h4>
-			</div>
-			<div class="modal-body">
-				<c:forEach items="${exList}" var="Edto">
-					<c:if test="${Edto.num eq num}">
-							<table border="1" style="background-color: #ffffff;">
-							<tr>
-						
-								<td width="60" height="30" align="center">작성자</td>
-								<td width="120">${Edto.name}</td>
-								<td width="60" height="30" align="center">제목</td>
-								<td width="260">${Edto.title}</td>
-							</tr>
-							<tr>
-								<td height="30" colspan="4" align="center">내용</td>
-							</tr>
-							<tr>
-								<td height="310" colspan="4" align="center">${Edto.content}</td>
-							</tr>
-							<tr>
-								<td colspan="4"><input type="submit" value="수정">
-									&nbsp;&nbsp; <a href="list">목록보기</a> &nbsp;&nbsp; <a
-									href="delete">삭제</a>&nbsp;&nbsp; <a href="reply_view">답변</a></td>
-							</tr>
-						</table>
-					</c:if>
-				</c:forEach>
-				<div>
-					<br>
-				</div>
-				<div class="modal-footer">
-					<button type="button" data-toggle="modal" data-target="#myModal"
-						class="btn btn-default" data-dismiss="modal" style="color: white;">뒤로가기</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal"
-						style="color: white;">닫기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 <!-- 글쓰기 -->
 <div class="modal fade" id="newText" tabindex="-1" role="dialog" data-backdrop="static"
 	aria-labelledby="myModalLabel"
@@ -224,23 +211,30 @@ function numInsert(num1){
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel">글작성</h4>
 			</div>
+		
 			<div class="modal-body">
 				<form action="exboard_write" method="post">
+					
 					<table border="1">
 						<tr>
-							<td>이름</td>
-							<td><input type="text" name="name" value="${user_name} "></td>
+							<td class="exboardSave1" width="50px">이름</td>
+							<td><input class="exboardSave-nt" type="text" name="name" value="${user_name}" disabled="disabled" >
+							<input class="exboardSave-nt" type="text" name="name" value="${user_name}" hidden="true"></td>
+							<td class="exboardSave1" width="50px">제목</td>
+							<td><input class="exboardSave-nt" type="text" name="title" size="20"></td>
 						</tr>
 						<tr>
-							<td>제목</td>
-							<td><input type="text" name="title" size="20"></td>
+							<td class="exboardSave1">내용</td>
+							<td colspan="3"><textarea class="exboardSave-ct" name="content" rows="10"></textarea></td>
 						</tr>
 						<tr>
-							<td>내용</td>
-							<td><textarea name="content" rows="10"></textarea></td>
+							<td class="exboardSave1">영상 링크</td>
+							<td colspan="3"><textarea class="exboardSave-nt" name="link"></textarea></td>
 						</tr>
 						<tr>
-							<td><select name="part">
+						<td class="exboardSave1">분류</td>
+							<td>
+							<select name="part">
 									<option value="1">팔</option>
 									<option value="2">다리</option>
 									<option value="3">가슴,배</option>
@@ -248,8 +242,9 @@ function numInsert(num1){
 									<option value="5">어깨</option>
 									<option value="6">등</option>
 									<option value="7">엉덩이</option>
-							</select></td>
-							<td><input type="submit" value="저장">&nbsp;&nbsp;</td>
+							</select>
+							</td>
+							<td colspan="2"><input type="submit" value="저장"></td>
 						</tr>
 					</table>
 				</form>
@@ -268,5 +263,7 @@ function numInsert(num1){
 	</div>
 </div>
 
+
+<%@ include file="exPage/exBoardContent.jsp"%>
 </body>
 </html>
