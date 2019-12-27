@@ -100,6 +100,14 @@
   		insert into ticketBuyerDB (ticketBuyerName, ticketBuyerID, ticketstartdate, ticketenddate, ticketprice, ticketduration) values(#{ticketBuyerName},#{ticketBuyerId},#{ticketStartDate},#{ticketEndDate},#{ticketPrice},#{ticketDuration}) 
   	</insert>
   	
+  	<select id="checkTicketValid" resultType="TBdto" parameterType="String">
+  		select * from(select ticketenddate from ticketbuyerdb where ticketbuyerid=#{id} order by ticketEndDate desc) where rownum=1
+  	</select>
+
+    <update id="ticketValidOff" parameterType="String">
+     	update userDB set Ticket=0 where userId=#{id}
+    </update>
+  	
   		<!-- 운동법 쿼리 -->
   	
 	<!--  ==================운동법 페이지=================================== -->  	

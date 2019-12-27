@@ -40,5 +40,13 @@ public class ticketDAO {
 	public List<ticketBuyerDTO> myTicketlist(String id) { 
 		return sqlSession.selectList(namespace + ".myTicketlist", id); //여러개의 데이터를 가져올떄 
 	} 
+
+	public ticketBuyerDTO checkTicketValid(String id) { 
+		return sqlSession.selectOne(namespace + ".checkTicketValid", id); //여러개의 데이터를 가져올떄 
+	} 
+
+	public int ticketValidOff(String id) { 
+		return sqlSession.update(namespace + ".ticketValidOff", id); //여러개의 데이터를 가져올떄 
+	} 
 	
 }

@@ -70,6 +70,8 @@ public class ticketRegisterServiceImpl implements TicketService{
 			if(result == 1) {
 				System.out.println("test : "+request.getParameter("sessionId"));
 				int user_result=Udao.updateTicket(request.getParameter("sessionId").trim());
+				HttpSession session = request.getSession();
+				session.setAttribute("user_ticket", 1);
 				if(user_result == 1) {
 					return 1;
 				}else {return 0;}
