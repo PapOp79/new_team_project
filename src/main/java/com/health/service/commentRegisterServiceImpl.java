@@ -14,15 +14,18 @@ import com.health.dto.commentDTO;
 public class commentRegisterServiceImpl implements CommentService {
 
 	@Autowired
-	public commentDAO dao;
+	private commentDAO dao;
 	@Override
 	public int execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		commentDTO Cdto = new commentDTO();
+		System.out.println(Integer.parseInt(request.getParameter("num")));
 		Cdto.setBoardnum(Integer.parseInt(request.getParameter("num")));
+		System.out.println(request.getParameter("commentation"));
 		Cdto.setCommentation(request.getParameter("commentation"));
+		System.out.println(request.getParameter("commentId"));
 		Cdto.setCommentId(request.getParameter("commentId"));
 		Cdto.setCommentsecret(Integer.parseInt(request.getParameter("commentsecret")));
 		

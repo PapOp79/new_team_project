@@ -83,8 +83,6 @@
 				</c:choose>
 			</c:forEach>
 
-
-
 			<tr>
 				<td colspan="5"><input type="button" value="글작성"
 					onclick="writechk()"></td>
