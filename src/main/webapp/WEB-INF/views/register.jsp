@@ -43,7 +43,8 @@ color:white;
          <tr>
             <td>
                 <p>
-                  아이디를 입력해주세요.&nbsp;&nbsp;&nbsp;<span id="idChk"></span>
+                	<span id="idChk" name="idChk" style="color:white; font-family: dohyun;">아이디를 입력해주세요.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                	<span id="idchkresult" style="color: white; font-family: dohyun; font-style: italic;"></span>
                </p>
             </td>
          </tr>
@@ -52,6 +53,7 @@ color:white;
             <td>
             	<input class="gray_textbox" type="text" style="margin-left:15%; margin-top:2px; width:60%; height:30px; align-self: center;" name="userId" id="userId"
                 maxlength="14" required="required" aria-required="true" placeholder="숫자와 영어로 4-14자">
+                <input type="button" value="중복 체크" onclick="IdDuplicatechk()" class="orange_btn">
             </td>
          </tr>
 
@@ -80,10 +82,10 @@ color:white;
 
          <tr>
             <td><input type="password" size="17" maxlength="20"
-               id="password_check" name="pw_check"
+               id="pwchk" name="pwchk"
                required="required" aria-required="true"
                class="gray_textbox" style="width:60%; margin-left:15%; margin-top:2px;"
-               placeholder="비밀번호가 일치해야합니다."></td>
+               placeholder="비밀번호가 일치해야합니다." onchange="pwchk()"></td>
          </tr>
 
          <tr>
@@ -113,7 +115,7 @@ color:white;
             <td><input type="email" name="userEmail" id="userEmail"
                required="required" aria-required="true"
                class="gray_textbox" style="width:60%; margin-left:15%; margin-top:2px;"
-               placeholder="ex) izone@produce.com"></td>
+               placeholder="ex) HouGYM@HouGYM.com"></td>
          </tr>
          
          <tr>
@@ -182,7 +184,7 @@ color:white;
 
          <tr>
             <td style="width: 100%; text-align: center; colspan: 2;"><input
-               type="submit" value="회원 가입" class="orange_btn" id="signup-btn" style="background-color: #fe6000; margin-top: 0; height: 40px; width:70%; color: white;">
+               type="submit" value="회원 가입" class="orange_btn" id="signup-btn" style="background-color: #fe6000; margin-top: 0; height: 40px; width:70%; color: white;" onclick="">
             </td>
          </tr>
       </table>
@@ -193,4 +195,47 @@ color:white;
    <%@ include file="include/footer.jspf" %>
    </div>
 </body>
+
+<script type="text/javascript">
+
+	function IdDuplicatechk(){
+		var register_Id = $('#userId').val()
+		
+		$.ajax({
+			url:'idDuplicateChk?userId='+register_Id,
+			type : 'post',
+			success : function(data){
+				
+				if(data == 1){
+					$('#userId').css('background-color', '#fe6000');
+					$('#idchkresult').text("아이디 중복이야!   ")
+					$('#idchkresult').append("<img src='resources/static/img/cancel.png' style="+'width:20px; height:20px;'+">")
+				} else{
+					$('#userId').css('background-color', 'rgb(61,61,61)');
+					$('#idchkresult').text("아이디 가능이야!   ")
+					$('#idchkresult').append("<img src='resources/static/img/checked.png' style="+'width:20px; height:20px;'+">")
+					
+					
+				}
+			}
+		})		
+	}
+
+	$(function(){
+
+		//비밀번호 확인
+			$('#pwchk').blur(function(){
+			   if($('#userPw').val() != $('#pwchk').val()){
+			    	if($('#pwchk').val()!=''){
+				    alert("비밀번호가 일치하지 않습니다.");
+			    	    $('#pwchk').val('');
+			          $('#pwchk').focus();
+			       }
+			    }
+			})  	   
+		});
+
+	
+
+</script>
 </html>

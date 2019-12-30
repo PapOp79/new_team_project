@@ -149,6 +149,8 @@ public class mainController {
 	public String trainerRegister() {
 		return "trainerRegister";
 	}
+
+	
 	
 	@RequestMapping("logout")
 	   public String logout(HttpServletRequest requset) {
@@ -384,5 +386,15 @@ public class mainController {
 			
 		   return "index";
 	   }
+	   
+	   @RequestMapping("idDuplicateChk")
+	   @ResponseBody
+		public int idDuplicatechk(Model model, HttpServletRequest request) throws Exception{
+		   model.addAttribute("request",request);
+		   login = (LoginService) applicationContext.getBean("idDuplicateChk");
+			int result = login.execute(model);
+			System.out.println(result);
+		   return result;
+		}
 	   
 }

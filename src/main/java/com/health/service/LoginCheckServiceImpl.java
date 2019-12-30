@@ -82,46 +82,11 @@ public class LoginCheckServiceImpl implements LoginService{
 			if(compare==1) {
 				System.out.println("compare="+compare);
 			} else {
-				System.out.println(request.getParameter("userId"));
 				Tdao.ticketValidOff(request.getParameter("userId"));
 				session.setAttribute("user_ticket", user.getTicket());
 				
 			}
-			
-			
-//			System.out.println(cdate);
-//			System.out.println(ldate);
-//			long currtime = System.currentTimeMillis();
-//			SimpleDateFormat currdate = new SimpleDateFormat("yyyy-MM-dd");
-//			SimpleDateFormat ticketLastDate = new SimpleDateFormat("yyyy-MM-dd");
-//			
-//			currdate.format(new Date(currtime));
-//			System.out.println("체크체크 : "+request.getParameter("userId"));
-//			List<Object> list = Tdao.checkTicketValid(request.getParameter("userId"));
-//			
-//			
-//			
-//			for(int i=0; i<list.size(); i++) {
-//				System.out.println(list.get(i).toString());
-//				SimpleDateFormat getTicketDate = new SimpleDateFormat("yyyy-MM-dd");
-//				Date getLastdate = new Date();
-//				Calendar lastdate = Calendar.getInstance();
-//				Calendar ticketdate = Calendar.getInstance();
-//				lastdate.setTime(getLastdate);
-//				ticketdate.setTime(getTicketDate.parse(list.get(i).toString()));
-//				int compare = lastdate.compareTo(ticketdate);
-//				if(compare==1) {
-//					System.out.println("compare=1");
-//				} else {
-//					lastdate = ticketdate;
-//				}
-//				System.out.println(i+" : "+"lastdate = "+getTicketDate.parse(lastdate.getTime().to));
-//			}
-			
-			
-			//System.out.println(currdate.format(new Date(currtime)));
-			 
-			
+
 			return 1;
 		}
 		return 1;
