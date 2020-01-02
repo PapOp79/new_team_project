@@ -21,11 +21,8 @@ import com.health.dto.exBoardDTO;
 
 @Service
 public class exBoardSaveServiceImpl implements exBoardService{
-
-	
 	@Autowired
 	private exBoardDAO dao;
-	
 	@Override
 	public void execute(Model model) {
 		Map<String,Object>map = model.asMap();
@@ -39,7 +36,7 @@ public class exBoardSaveServiceImpl implements exBoardService{
 		  Date date = new Date();
 	      String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
 	      java.util.Date date1=null;
-	      
+
 	      try {
 	        date1 = new SimpleDateFormat("yyyy-MM-dd").parse(currentDate);
 	      } catch (Exception e) {
@@ -48,32 +45,12 @@ public class exBoardSaveServiceImpl implements exBoardService{
 	      java.sql.Date savedate = new java.sql.Date(date1.getTime());
 	      dto.setSavedate(savedate);
 		
-		
-		
 		String str = request.getParameter("link");
-		
 		String[] you = str.split("/");
-		
 		int size = you.length-1;
-		
 		String y = "https://youtube.com/embed/"+you[size];
-		
-		try { 
-			Desktop.getDesktop().browse(new URI(y)); 
-		} catch (IOException e) { e.printStackTrace(); 
-		} catch (URISyntaxException e) { e.printStackTrace(); }
-		
-	
-		
-		
 		dto.setLink(y);
 		
-		
-		
-		
-		
 		dao.exBoard_write(dto);
-		
 	}
-
 }

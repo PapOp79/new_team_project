@@ -32,5 +32,6 @@
 
 		<typeAlias type="com.health.dto.exBoardDTO" alias="Edto" />
 		<typeAlias type="com.health.dao.exBoardDAO" alias="Edao" />
+		<typeAlias type="com.health.dto.exBoardPagingDTO" alias="EPdto" />
   	</typeAliases>
   </configuration>

@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <style>
 ::selection {
 	background-color: black;
@@ -81,22 +78,24 @@ $(document).ready(function(){
 		if($("#saveTitle").val().length==0){alert("제목을 입력하세요"); $("#saveTitle").focus(); return false;}
 	});
 });
+
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<div class="modal fade" id="newText" tabindex="-1" role="dialog" data-backdrop="static"
-	aria-labelledby="myModalLabel" style="background: none; top: 20%; color: #ff7f00; overflow-y:scroll;" >
-	<div class="modal-dialog" role="document">
-		<div class="modal-content"
-			style="background-color: #000000; background-color: rgba(0, 0, 0, 0.2); color: white;">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">글작성</h4>
-			</div>
-		
-			<div class="modal-body">
-				<form action="exboard_write" method="post">
+<!-- 글쓰기 모달 -->
+	<div class="modal fade" id="newText" tabindex="-1"
+		role="dialog" data-backdrop="static"
+		style="background: none; color: #ff7f00; overflow-y:scroll;" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content"
+				style="background-color: #000000; background-color: rgba(0, 0, 0, 0.2); color: white;">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">글작성</h4>
+				</div>
+				<div class="modal-body">
+					<form action="exboard_write" method="post">
 					
 					<table border="1" >
 						<tr>
@@ -117,7 +116,7 @@ $(document).ready(function(){
 						<tr>
 						<td align="center">분류</td>
 							<td>
-							<select name="part">
+							<select name="part" id="save-part">
 									<option value="1">팔</option>
 									<option value="2">다리</option>
 									<option value="3">가슴,배</option>
@@ -131,20 +130,28 @@ $(document).ready(function(){
 						</tr>
 					</table>
 				</form>
-			</div>
-			<div>
-				<br>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" data-toggle="modal" data-target="#myModal"
+					</div>
+					<div class="modal-footer">
+						<button type="button" onclick="saveBack()" 
 					class="btn btn-default" data-dismiss="modal" style="color: white;">뒤로가기</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal"
 					style="color: white;">닫기</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
+<script type="text/javascript">
+var savepart;
+var recipient8;
+$('#newText').on('show.bs.modal', function (event) {
+	 var a = $(event.relatedTarget)
+	savepart = a.data('content7')
+	recipient8 = a.data('content8')
+    var modal = $(this)
+    $("#save-part").val(recipient8).prop("selected", true);
+  })
+  function saveBack(){
+	$("#"+savepart+"").modal();
+}</script>
 </body>
 </html>

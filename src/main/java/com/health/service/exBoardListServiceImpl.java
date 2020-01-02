@@ -5,11 +5,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.health.dao.exBoardDAO;
+import com.health.dto.exBoardPagingDTO;
 @Service
 public class exBoardListServiceImpl implements exBoardService{
 
@@ -17,8 +17,7 @@ public class exBoardListServiceImpl implements exBoardService{
 	public exBoardDAO dao;
 	@Override
 	public void execute(Model model) {
-		
 		model.addAttribute("exList",dao.exList());
 	}
-
+	
 }

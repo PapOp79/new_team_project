@@ -44,7 +44,7 @@ public class mainController {
 
 	@RequestMapping("ex")
 	public String ex(HttpServletRequest request, Model model) {
-		eboard = (exBoardListServiceImpl)applicationContext.getBean("exBoardListServiceImpl");
+		eboard = (exBoardService)applicationContext.getBean("exBoardListServiceImpl");
 		eboard.execute(model);
 	
 		return "ex1";
