@@ -1,47 +1,49 @@
 package com.health.dto;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+
 
 public class exBoardDTO {
 private String name;
 private String title;
 private String content;
-private Timestamp savedate;
+private Date savedate;
 private int part;
 private int num;
 private String link;
-
-private int pageIndex = 1;
-private int pageSize = 10;
-private int pageGroupSize = 3;
-
+private int startPage;
+private int endPage;
+private int totalEndPage;
 
 
 
+
+
+public int getStartPage() {
+	return startPage;
+}
+public void setStartPage(int startPage) {
+	this.startPage = startPage;
+}
+public int getEndPage() {
+	return endPage;
+}
+public void setEndPage(int endPage) {
+	this.endPage = endPage;
+}
+public int getTotEndPage() {
+	return totalEndPage;
+}
+public void setTotEndPage(int totEndPage) {
+	this.totalEndPage = totEndPage;
+}
 public String getLink() {
 	return link;
 }
 public void setLink(String link) {
 	this.link = link;
 }
-public int getPageIndex() {
-	return pageIndex;
-}
-public void setPageIndex(int pageIndex) {
-	this.pageIndex = pageIndex;
-}
-public int getPageSize() {
-	return pageSize;
-}
-public void setPageSize(int pageSize) {
-	this.pageSize = pageSize;
-}
-public int getPageGroupSize() {
-	return pageGroupSize;
-}
-public void setPageGroupSize(int pageGroupSize) {
-	this.pageGroupSize = pageGroupSize;
-}
+
 public String getName() {
 	return name;
 }
@@ -60,10 +62,10 @@ public String getContent() {
 public void setContent(String content) {
 	this.content = content;
 }
-public Timestamp getSavedate() {
+public Date getSavedate() {
 	return savedate;
 }
-public void setSavedate(Timestamp savedate) {
+public void setSavedate(Date savedate) {
 	this.savedate = savedate;
 }
 public int getPart() {

@@ -42,39 +42,10 @@ background-color: rgba(0, 0, 0, 0.8);
 color: white;
 }
 
-textarea.exboardSave-nt { 
-cursor: auto;
-width:100%; 
-height:100%;
-
-resize: none; 
-text-align:center;
-vertical-align:middle;
-background-color:white;
-text-margin-top:auto; 
-margin-bottom:auto;
-border:0px;
-}
-
-textarea.exboardSave-ct { 
-cursor: auto;
-width:100%; 
-height:100%;
-min-height:100px;
-min-width:200px;
-resize: none; 
-text-align:center;
-vertical-align:middle;
-background-color:white;
-text-margin-top:auto; 
-margin-bottom:auto;
-border:0px;
-}
-
-.exboardSave1{
-text-align:center;
 
 }
+
+
 </style>
 <script type="text/javascript">
 var num10;
@@ -92,7 +63,9 @@ function change() {
 function numInsert(num1){
 	num10 = num1;
 	
-	
+
+
+
 }
 </script>
 </head>
@@ -137,133 +110,22 @@ function numInsert(num1){
 			</div>
 		</div>
 	</div>
+	<br><br><br><br><br><br><br>
 <div style="position: fixed; bottom: 60px; margin-left: 30PX;">
 	<%@ include file="include/footer.jspf"%>
 </div>
 </body>
 <!-- 모달 영역 -->
 <!-- 앞모습  -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static"
-	aria-labelledby="myModalLabel" aria-hidden="true" style="top: 20%;">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content"
-			style="background-color: #000000; background-color: rgba(0, 0, 0, 0.8); color: white;">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">팔</h4>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				</div>
-			<div class="modal-body">
-				<table border="1" align="center"
-					style="background-color: white; color: black; font-family: dohyun;">
-					<tr>
-						<td width="90" height="30" align="center">작성자</td>
-						<td width="250" height="30" align="center">제목</td>
-						<td width="90" height="30" align="center">작성일</td>
-						<c:forEach items="${exList}" var="Edto">
-							<c:if test="${Edto.part == 1 }">
-					
-								<tr>
-									<td height="30">${Edto.name}</td>
-									<td height="30"><a data-target="#exboard_content" data-toggle="modal" 
-									data-content1="${Edto.name }"
-									data-content2="${Edto.title }"
-									data-content3="${Edto.content}"
-									data-content4="${Edto.link}"
-									 onclick='iframe("${Edto.link}")'
-									 data-dismiss="modal" >
-									${Edto.title}</a></td>
-									<td height="30">${Edto.savedate }</td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					<tr>
-						<td align="center" colspan="3"
-							style="background-color: #000000; background-color: rgba(0, 0, 0, 0.8);">
-							<c:if test='${sessionScope.Admin eq 1 or sessionScope.Admin eq 2}'>
-								<a data-toggle="modal" data-target="#newText"
-									style="color: #ff7f00;"  data-dismiss="modal">글작성 </a>
-							</c:if>
-						</td>
-					</tr>
-				</table> 
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"
-							style="color: white;">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 
 	
 
 <!-- 글쓰기 -->
-<div class="modal fade" id="newText" tabindex="-1" role="dialog" data-backdrop="static"
-	aria-labelledby="myModalLabel"
-	style="background: none; top: 20%; color: #ff7f00;">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content"
-			style="background-color: #000000; background-color: rgba(0, 0, 0, 0.2); color: white;">
-			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">글작성</h4>
-			</div>
-		
-			<div class="modal-body">
-				<form action="exboard_write" method="post">
-					
-					<table border="1">
-						<tr>
-							<td class="exboardSave1" width="50px">이름</td>
-							<td><input class="exboardSave-nt" type="text" name="name" value="${user_name}" disabled="disabled" >
-							<input class="exboardSave-nt" type="text" name="name" value="${user_name}" hidden="true"></td>
-							<td class="exboardSave1" width="50px">제목</td>
-							<td><input class="exboardSave-nt" type="text" name="title" size="20"></td>
-						</tr>
-						<tr>
-							<td class="exboardSave1">내용</td>
-							<td colspan="3"><textarea class="exboardSave-ct" name="content" rows="10"></textarea></td>
-						</tr>
-						<tr>
-							<td class="exboardSave1">영상 링크</td>
-							<td colspan="3"><textarea class="exboardSave-nt" name="link"></textarea></td>
-						</tr>
-						<tr>
-						<td class="exboardSave1">분류</td>
-							<td>
-							<select name="part">
-									<option value="1">팔</option>
-									<option value="2">다리</option>
-									<option value="3">가슴,배</option>
-									<option value="4">무릎</option>
-									<option value="5">어깨</option>
-									<option value="6">등</option>
-									<option value="7">엉덩이</option>
-							</select>
-							</td>
-							<td colspan="2"><input type="submit" value="저장"></td>
-						</tr>
-					</table>
-				</form>
-			</div>
-			<div>
-				<br>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" data-toggle="modal" data-target="#myModal"
-					class="btn btn-default" data-dismiss="modal" style="color: white;">뒤로가기</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal"
-					style="color: white;">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
 
 
+<%@ include file="exPage/exBoardList.jsp"%>
 <%@ include file="exPage/exBoardContent.jsp"%>
+<%@ include file="exPage/exBoardSave.jsp"%>
 </body>
 </html>

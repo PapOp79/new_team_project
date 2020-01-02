@@ -5,6 +5,7 @@
 <html>
 <head>
 <style>
+
 ::selection {
 	background-color: black;
 	color: white;
@@ -37,7 +38,9 @@ textarea.content-ct {
 	text-margin-top: auto;
 	margin-bottom: auto;
 	border: 0px;
+
 }
+@media
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -54,7 +57,7 @@ textarea.content-ct {
 	<!-- 글 보기 -->
 	<div class="modal fade" id="exboard_content" tabindex="-1"
 		role="dialog" data-backdrop="static"
-		style="background: none; color: #ff7f00;">
+		style="background: none; color: #ff7f00; overflow-y:scroll;" >
 		<div class="modal-dialog" role="document">
 			<div class="modal-content"
 				style="background-color: #000000; background-color: rgba(0, 0, 0, 0.2); color: black;">
@@ -62,48 +65,74 @@ textarea.content-ct {
 					<h4 class="modal-title" id="myModalLabel">게시글</h4>
 				</div>
 				<div class="modal-body">
-			
-									
-						
-					<table border="1" style="background-color: #ffffff;">
-						<tr>
-					
-							<td colspan="4">
-							<textarea class="content4"
-									disabled="disabled" hidden="true"></textarea>
-							
-							<iframe id="c-video"  width="100%" height="300px"
-									 frameborder="0"
-									allow="accelerometer; autoplay; encrypted-media;
+					<form action="exboard_modify">
+						<table border="1" style="background-color: #ffffff;">
+							<tr>
+								<td colspan="4">
+								<textarea class="content4"
+										disabled="disabled" hidden="true"></textarea> <iframe
+										id="c-video" width="100%" height="300px" frameborder="0"
+										allow="accelerometer; autoplay; encrypted-media;
  									gyroscope; picture-in-picture"
-									allowfullscreen></iframe>
-								
-									</td>
-									
-						<tr>
-
-							<td width="60" height="20" align="center">작성자</td>
-							<td><textarea class="content1 content-nt"
-									disabled="disabled"></textarea></td>
-							<td width="60" height="20" align="center">제목</td>
-							<td width="260"><textarea class="content2 content-nt"
-									disabled="disabled"></textarea></td>
-						</tr>
-						<tr>
-							<td height="30" colspan="4" align="center">내용</td>
-						</tr>
-						<tr>
-							<td height="310" colspan="4" align="center"><textarea
-									class="content3 content-ct" disabled="disabled"></textarea></td>
-						</tr>
-						<tr>
-							<td colspan="4"><input type="submit" value="수정">
-								&nbsp;&nbsp; <a href="list">목록보기</a> &nbsp;&nbsp; <a
-								href="delete">삭제</a>&nbsp;&nbsp; <a href="reply_view">답변</a></td>
-						</tr>
-					</table>
-
-
+										allowfullscreen></iframe>
+										<c:if test="${sessionScope.Admin eq 1 or sessionScope.Admin eq 2}">
+										<textarea class="content4 content-nt"
+										name="modify-link"></textarea>
+										</c:if>
+										</td>
+							<tr>
+								<td width="60" height="20" align="center">작성자</td>
+								<td>
+								<textarea class="content1 content-nt"
+										disabled="disabled"></textarea>
+										</td>
+								<td width="60" height="20" align="center">제목</td>
+								<td width="260">
+								<c:choose>
+								<c:when test="${sessionScope.Admin eq 1 or sessionScope.Admin eq 2}">
+								<textarea class="content2 content-nt"
+										name="modify-title"></textarea>
+								</c:when>
+								<c:otherwise>
+								<textarea class="content2 content-nt"
+										disabled="disabled"></textarea>
+										</c:otherwise></c:choose></td>
+							</tr>
+							<tr>
+								<td height="30" colspan="4" align="center">내용</td>
+							</tr>
+							<tr>
+								<td height="310" colspan="4" align="center">
+								<c:choose>
+								<c:when test="${sessionScope.Admin eq 1 or sessionScope.Admin eq 2}">
+								<textarea class="content3 content-ct" name="modify-content"></textarea>
+								</c:when>
+								<c:otherwise>
+								<textarea class="content3 content-ct" disabled="disabled"></textarea>
+								</c:otherwise></c:choose></td>
+							</tr>
+							<tr>
+								<td colspan="3">
+								<c:if test='${sessionScope.Admin eq 1 or sessionScope.Admin eq 2}'>
+								<select name="modify-part">
+									<option value="1">팔</option>
+									<option value="2">다리</option>
+									<option value="3">가슴,배</option>
+									<option value="4">무릎</option>
+									<option value="5">어깨</option>
+									<option value="6">등</option>
+									<option value="7">엉덩이</option>
+							</select>
+							<input class="content5" hidden="true" name="modify-num">
+								<button type="submit">수정</button></form>
+										
+									</td><td><form action="exboard_delete">
+											<input class="content5" hidden="true" name="num">
+											<button type="submit">삭제</button>
+										</form></c:if></td>
+							</tr>
+						</table>
+					
 					<div>
 						<br>
 					</div>
@@ -126,19 +155,18 @@ $('#exboard_content').on('show.bs.modal', function (event) {
     var recipient2 = a.data('content2')
     var recipient3 = a.data('content3')
     recipient4 = a.data('content4')
+     var recipient5 = a.data('content5')
     var modal = $(this)
     modal.find('.modal-title').text('게시글')
     modal.find('.modal-body .content1').val(recipient1)
     modal.find('.modal-body .content2').val(recipient2)
     modal.find('.modal-body .content3').val(recipient3)
 	modal.find('.modal-body .content4').val(recipient4)
+	modal.find('.modal-body .content5').val(recipient5)
   })
   function iframe(recipient4) {
 	$('#c-video').attr('src', recipient4);
 }
-
 </script>
-
-
 </body>
 </html>

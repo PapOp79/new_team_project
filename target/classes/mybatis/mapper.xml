@@ -119,17 +119,29 @@
   	
 	<!--  ==================운동법 페이지=================================== -->  	
 	<select id="exlist" resultType="Edto">
-		select * from exBoard
+		select * from exBoard order by num desc
 	</select>
 	
 	<insert id="exboardwrite" parameterType="Edto">
-		insert into exBoard(name,title,content,savedate,part,num) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard))
+		insert into exBoard(name,title,content,savedate,part,num,link) values(#{name},#{title},#{content},sysdate,#{part},(SELECT NVL(MAX(num),0)+1 FROM exBoard),#{link})
 	</insert>
 
 
 	<select id="exBoardContent" resultType="Edto">
 		select * from exBoard where num=#{num}
 	</select>
+
+	<delete id="exboarddelete" parameterType="Edto">
+	delete from exBoard where num=#{num}
+	</delete>
+	
+	<update id="exboardmodify" parameterType="Edto">
+	update exBoard set title=#{title}, content=#{content}, link=#{link} where num=#{num}
+	</update>
+	
+	<select id="exboardgetTotalPage" resultType="int">
+      select count(*) from exboard
+    </select>
 
 	<!-- ==============게시판============== -->
 	<select id="boardList" parameterType="Pdto" resultType="Bdto">

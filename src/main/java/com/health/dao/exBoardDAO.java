@@ -27,4 +27,14 @@ public List<exBoardDTO> exBoard_Content(int num) {
 	return sqlSession.selectOne(namespace+".exboardcontent",num);
 }
 
+public int exBoard_delete(int num) {
+	return sqlSession.insert(namespace+".exboarddelete",num);
+}
+
+public int exBoard_modify(exBoardDTO dto) {
+	return sqlSession.update(namespace+".exboardmodify",dto);
+}
+public int getTotalPage() {
+	return sqlSession.selectOne(namespace + ".exboardgetTotalPage");
+}
 }
