@@ -164,5 +164,9 @@
      	    	
     <select id="commentlist" resultType="Cdto">
     	select * from commentDB where boardnum=#{num}
+    </select>
+    
+    <select id="commentlist_id" resultType="String">
+    	select commentid from commentDB where boardnum=#{num}
     </select>	  	
 </mapper>

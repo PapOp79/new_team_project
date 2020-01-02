@@ -14,7 +14,7 @@ import com.health.dao.commentDAO;
 import com.health.dto.commentDTO;
 
 @Service
-public class commentListServiceImpl implements CommentListService{
+public class commentListReplyIdServiceImpl implements CommentListService{
 	@Autowired
 	private commentDAO Cdao;
 	
@@ -22,10 +22,10 @@ public class commentListServiceImpl implements CommentListService{
 	public List<commentDTO> execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		List<commentDTO> list_reply = new ArrayList<commentDTO>();
+		List<commentDTO> reply_id = new ArrayList<commentDTO>();
 		int num = Integer.parseInt(request.getParameter("num").trim());
-		list_reply = Cdao.commentlist(num);
+		reply_id = Cdao.commentlist_id(num);
 
-		return list_reply;
+		return reply_id;
 	}
 }
