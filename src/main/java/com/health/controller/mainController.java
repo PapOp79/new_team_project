@@ -49,8 +49,9 @@ public class mainController {
 
 	@RequestMapping("ex")
 	public String ex(HttpServletRequest request, Model model) {
-		eboard = (exBoardListServiceImpl)applicationContext.getBean("exBoardListServiceImpl");
+		eboard = (exBoardService)applicationContext.getBean("exBoardListServiceImpl");
 		eboard.execute(model);
+	
 		return "ex1";
 	}
 	
@@ -154,6 +155,8 @@ public class mainController {
 	public String trainerRegister() {
 		return "trainerRegister";
 	}
+
+	
 	
 	@RequestMapping("logout")
 	   public String logout(HttpServletRequest requset) {
@@ -294,7 +297,7 @@ public class mainController {
 			return "redirect:ex";
 		}
 	 
-	   
+	  
 	   @RequestMapping("exBoardContent")
 	   public String modal(HttpServletRequest request,Model model) {
 		   System.out.println("exboardcontent 실행");
@@ -303,7 +306,21 @@ public class mainController {
 			
 		   return "ex1";
 	   }
+	   @RequestMapping(value="/exboard_delete")
+		public String  exboard_delete(HttpServletRequest request,Model model){
+			model.addAttribute("request",request);
+			eboard = (exBoardService) applicationContext.getBean("exBoardDeleteServiceImpl");
+			eboard.execute(model);
+			return "redirect:ex";
+		}
 	   
+	   @RequestMapping(value="/exboard_modify")
+		public String  exboard_modify(HttpServletRequest request,Model model){
+			model.addAttribute("request",request);
+			eboard = (exBoardService) applicationContext.getBean("exBoardModifyServiceImpl");
+			eboard.execute(model);
+			return "redirect:ex";
+		}
 	   // ===================게시판======================
 	   @RequestMapping("board")
 	   public String board(Model model, HttpServletRequest request) {
@@ -408,4 +425,14 @@ public class mainController {
 		   
 		   return commentL.execute(model);
 	   }
+	   @RequestMapping("idDuplicateChk")
+	   @ResponseBody
+		public int idDuplicatechk(Model model, HttpServletRequest request) throws Exception{
+		   model.addAttribute("request",request);
+		   login = (LoginService) applicationContext.getBean("idDuplicateChk");
+			int result = login.execute(model);
+			System.out.println(result);
+		   return result;
+		}
+	   
 }

@@ -80,36 +80,7 @@ public class userDAO {
 	}
 
 
-	public boolean isDuplicateId(String id) throws Exception {
-
-		String sql = "SELECT userid "
-				+ "FROM userDB "
-				+ "WHERE userid=?";
-
-		//true硫� 以묐났, false硫� 以묐났X
-		boolean flag = true;
-
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-
-			if(rs.next()) {
-				System.out.println("ID媛� 以묐났�맖!");
-				flag = true;
-			} else {
-				System.out.println("ID媛� 以묐났�릺吏� �븡�븯�쓬!");
-				flag = false;
-			}			
-		} finally {
-			conn.close();
-			pstmt.close();
-			rs.close();
-		}
-
-		return flag;
-	}
+	
 
 	public int joinCheck(userDTO Udto) {
 		return sqlSession.insert(namespace + ".joinCheck", Udto);
@@ -134,6 +105,11 @@ public class userDAO {
 
 	public String pwchk(String id) {
 		return sqlSession.selectOne(namespace + ".pwchk", id);
+	}
+	
+	public String idDuplicateChk(String rid) {
+		System.out.println("dao/id = "+rid);
+		return sqlSession.selectOne(namespace + ".idDuplicateChk", rid);
 	}
 
 	public int updateTicket(String id) {
