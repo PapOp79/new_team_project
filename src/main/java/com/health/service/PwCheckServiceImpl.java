@@ -3,6 +3,7 @@ package com.health.service;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,8 @@ public class PwCheckServiceImpl implements LoginService{
 		
 		if(dbpw!=null) {
 			if(pwd.equals(dbpw)) {
+				HttpSession session = request.getSession();
+				session.setAttribute("pwchk", 1);	
 				return 1;
 			} else {
 				return -1;	

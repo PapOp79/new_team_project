@@ -7,10 +7,15 @@
 </head>
 <body>
 
+
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/static/css/agency.min.css?ver=1.2.18">
 
 <%@ include file="include/header.jspf"%>
+<c:if test="${sessionScope.pwchk eq 1}">
+	<meta http-equiv="refresh" content="0;url=mypage">
+</c:if>
 
 <body style="background-color: #111111;">
 
