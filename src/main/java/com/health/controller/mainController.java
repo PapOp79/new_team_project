@@ -416,15 +416,16 @@ public class mainController {
 		   return commentL.execute(model);
 	   }
 	   
-	   @RequestMapping("reply_id")
+	   @RequestMapping("commentmodifychk")
 	   @ResponseBody
-	   public List<commentDTO> reply_id(Model model, HttpServletRequest request) {
+	   public int commentmodifychk(Model model, HttpServletRequest request) {
 		   model.addAttribute("request",request);
-		   commentL = (CommentListService) applicationContext.getBean("commentListReplyIdServiceImpl");
-		   commentL.execute(model);
+			
+		   comment = (CommentService) applicationContext.getBean("commentModifyCheckServiceImpl");
 		   
-		   return commentL.execute(model);
+		   return comment.execute(model);
 	   }
+	   
 	   @RequestMapping("idDuplicateChk")
 	   @ResponseBody
 		public int idDuplicatechk(Model model, HttpServletRequest request) throws Exception{
@@ -434,5 +435,4 @@ public class mainController {
 			System.out.println(result);
 		   return result;
 		}
-	   
 }

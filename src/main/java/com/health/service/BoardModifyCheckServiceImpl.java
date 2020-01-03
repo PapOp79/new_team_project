@@ -23,12 +23,10 @@ public class BoardModifyCheckServiceImpl implements BoardService{
 		
 		boardDTO Bdto = new boardDTO();
 		Bdto.setNum(Integer.parseInt(request.getParameter("num")));
-		Bdto.setName(request.getParameter("name"));
-		Bdto.setTitle(request.getParameter("title"));
 		Bdto.setContent(request.getParameter("content"));
 		
 		int rn = dao.boardmodifychk(Bdto);
-		System.out.println("rn");
+		System.out.println(rn);
 		
 		if(rn == 1) {
 			boardDTO board = dao.boardview(Integer.parseInt(request.getParameter("num")));

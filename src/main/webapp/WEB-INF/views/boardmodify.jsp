@@ -24,21 +24,15 @@
 		<div style = "font-family: dohyun; color: white; margin-right: 21%;">내용</div>
 		<textarea class = "gray_textbox" name = "content"  cols = "22" rows = "10" style = "width: 25%; height: 4%;">${param.content}</textarea><br>
 	
-	
 		<button class = "orange_btn" 
 			type = "button" id = "boardmodifyok" style = "width:7%;" onclick = "form.submit()">수정 
 		</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 		<button class = "orange_btn" 
-			type = "button" id = "boardmodifyno" style = "width:7%;" onclick="location.href='board'">취소 
+			type = "button" id = "boardmodifyno" style = "width:7%;" onclick = "location.href='board'">취소
 		</button>
-	
 	</div>
 	</form>
-	
-	
-	
-	
 </body>
 	<div style="position: fixed; bottom: 60px; margin-left: 30PX;">
 	<%@ include file="include/footer.jspf" %>

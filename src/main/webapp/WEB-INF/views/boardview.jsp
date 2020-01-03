@@ -16,6 +16,18 @@
 		}
 	}
 	
+	function modifychange(num){
+		var formname = 'form'+num
+		var form = document.getElementById(formname);
+		var comment = form.elements[2];
+		var submitbutton = form.elements[3];
+		comment.value="";
+		comment.focus();
+		comment.readOnly=false;
+		submitbutton.innerHTML="확인"
+		submitbutton.setAttribute("onclick", "commentmodify("+formname+")");
+	}
+	
 	function commentlist(){
 		var num=<%=request.getParameter("num")%>
 		$.ajax({
@@ -29,14 +41,21 @@
 				var values = [];
 				values = data;
 				if(data.length>0){
-					$.each(values, function(index, Cdto){			
+					$.each(values, function(index, Cdto){						
+						html += "<form action='commentmodifychk' id='form"+Cdto.commentnum+"'method='post'>";
 						html += "<div>";
         	            html += "<div><table class='table'>";
-            	        html += "<tr><td>"+Cdto.commentId+"</td>";
-            	        html += "<td>"+Cdto.commentation+"</td>";
-            	        html += "<td>"+Cdto.regdate+"</td></tr>";
+            	        html += "<tr><td><input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+Cdto.commentnum+"'></td>";
+            	        html += "<td><input type='text id='commentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+Cdto.commentId+"'></td>";
+            	        html += "<td><input type='text id='commentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+Cdto.commentation+"'></td>";
+            	        html += "<td>"+Cdto.regdate+"</td>";
+            	        html += "<td><button class='orange_btn' type='button' style='width:25%;'" + 
+            	        		"id='commentmodifyok' onclick='modifychange("+Cdto.commentnum+")'>수정</button></td>";
+            	        html += "<td><button class='orange_btn' type='button' style='width:25%;'" + 
+            	        		"id='commentmodifyno' onclick='commentdel()'>삭제</button></td></tr>";
                 	    html += "</table></div>";
                     	html += "</div>";
+                    	html += "</form>";
 					});
 				}else{
 					html += "<div>";
@@ -49,12 +68,27 @@
 			error : function(){alert('fail!')}
 		});
 	}
-	
+
 	function commentadd(code){
 		$.ajax({
 			url:'commentregister',
 			type:'POST',
 			data:$("#boardcomment").serialize(),
+			success : function(data){
+				if(data == 1){
+					commentlist();
+				}
+			},
+			error : function(){alert('fail')}
+		});
+	}
+
+	function commentmodify(formname){
+		var formname = <%=request.getAttribute("formname")%>
+		$.ajax({
+			url:'commentmodifychk',
+			type:'POST',
+			data:{'formname':formname},
 			success : function(data){
 				if(data == 1){
 					commentlist();
@@ -120,7 +154,6 @@
 			</table>
 		</form>	
 	</div>
-	<div id="reply_Id" class = "reply_Id"></div>
 	<div id="commentList" class = "commentList"></div>
 </body>
 

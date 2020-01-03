@@ -9,8 +9,14 @@ public class commentDTO {
 	private String commentation;
 	private Date regdate;
 	private int commentsecret;
+	private int commentnum;
 	
-	
+	public int getCommentnum() {
+		return commentnum;
+	}
+	public void setCommentnum(int commentnum) {
+		this.commentnum = commentnum;
+	}
 	public int getCommentsecret() {
 		return commentsecret;
 	}
@@ -41,7 +47,4 @@ public class commentDTO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	
-	
-	
 }

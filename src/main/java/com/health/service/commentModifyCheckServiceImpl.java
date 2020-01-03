@@ -1,10 +1,9 @@
 package com.health.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,18 +13,25 @@ import com.health.dao.commentDAO;
 import com.health.dto.commentDTO;
 
 @Service
-public class commentListReplyIdServiceImpl implements CommentListService{
+public class commentModifyCheckServiceImpl implements CommentService{
 	@Autowired
 	private commentDAO Cdao;
 	
-	@Override
-	public List<commentDTO> execute(Model model) {
+	public int execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		List<commentDTO> reply_id = new ArrayList<commentDTO>();
-		int num = Integer.parseInt(request.getParameter("num").trim());
-		reply_id = Cdao.commentlist_id(num);
-
-		return reply_id;
+		
+		commentDTO Cdto = new commentDTO();
+		Cdto.setCommentation(request.getParameter("commentation"));
+		Cdto.setCommentnum(Integer.parseInt(request.getParameter("commentNum")));
+		
+		int rn = Cdao.commentmodifychk(Cdto);
+		System.out.println(rn);
+		
+		if(rn == 1) {
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 }

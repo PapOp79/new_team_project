@@ -169,7 +169,7 @@
     </delete>
     
     <update id="boardmodifychk" parameterType="Bdto">
-     	update board set name=#{name},title=#{title},content=#{content} where num=#{num}
+     	update board set content=#{content} where num=#{num}
     </update>
     
     <select id="boardgetTotalPage" resultType="int">
@@ -178,14 +178,18 @@
      	
      	<!--  ===================게시판 댓글 ======================= -->
     <insert id="commentregister" parameterType="Cdto">
-        insert into commentDB (boardnum, commentid, commentation, regdate, commentsecret) values(#{boardnum},#{commentId},#{commentation},sysdate, #{commentsecret})
+        insert into commentDB (boardnum, commentid, commentation, regdate, commentsecret, commentnum) values(#{boardnum},#{commentId},#{commentation},sysdate, #{commentsecret}, count_Cnum.nextval)
     </insert> 	
      	    	
     <select id="commentlist" resultType="Cdto">
     	select * from commentDB where boardnum=#{num}
-    </select>
+    </select>	
     
-    <select id="commentlist_id" resultType="String">
-    	select commentid from commentDB where boardnum=#{num}
-    </select>	  	
+    <update id="commentmodifychk" parameterType="Cdto">
+     	update commentDB set commentation=#{commentation},regdate=sysdate where commentnum=#{commentnum}
+    </update>
+    
+    <delete id="commentdel" parameterType="int">
+     	delete from commentDB where boardnum=#{num} 
+    </delete>  	
 </mapper>
