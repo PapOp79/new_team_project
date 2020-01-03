@@ -17,7 +17,7 @@
       
       <form action="ticketRegister" method="post">
       <div class="modal-body">
-      	<span style="font-family:dohyun; font-size: 1.25em;">등록 개월 수 : </span><input type="text" class="form-control_1" name="ticketDuration" id="ticketDuration"><br>
+      	<span style="font-family:dohyun; font-size: 1.25em;">등록 개월 수 : </span><input type="text" class="form-control_1" name="ticketDuration" id="ticketDuration" readonly="readonly"><br>
 		<span style="font-family:dohyun; font-size: 1.25em;">등록자 이름 : </span><input type="text" class="form-control_2" name="sessionName" id="sessionName"  readonly="readonly"><br>
 		<span style="font-family:dohyun; font-size: 1.25em;">등록자 아이디 : </span><input type="text" class="form-control_3" name="sessionId" id="sessionId" readonly="readonly"><br>
 		<span style="font-family:dohyun; font-size: 1.25em;">회원권 등록 날짜 : </span><input type="date" class="white_textbox" name="ticketStartDate"><br>
