@@ -5,10 +5,9 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import com.health.dto.exBoardDTO;
-
+import com.health.dto.exBoardPagingDTO;
 @Component
 public class exBoardDAO {
 	private static final String namespace="com.health.mybatis.myMapper";
@@ -34,7 +33,13 @@ public int exBoard_delete(int num) {
 public int exBoard_modify(exBoardDTO dto) {
 	return sqlSession.update(namespace+".exboardmodify",dto);
 }
-public int getTotalPage() {
-	return sqlSession.selectOne(namespace + ".exboardgetTotalPage");
+public List<exBoardDTO> paginglist(exBoardPagingDTO pc){
+	return sqlSession.selectList(namespace + ".boardpagingList", pc);
 }
+
+public int getTotalPage() {
+	return sqlSession.selectOne(namespace + ".exBoardgetTotalPage");
+	
+}
+
 }

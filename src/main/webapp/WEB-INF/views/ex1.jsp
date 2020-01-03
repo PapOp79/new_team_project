@@ -42,10 +42,6 @@ background-color: rgba(0, 0, 0, 0.8);
 color: white;
 }
 
-
-}
-
-
 </style>
 <script type="text/javascript">
 var num10;
@@ -62,10 +58,6 @@ function change() {
 }}
 function numInsert(num1){
 	num10 = num1;
-	
-
-
-
 }
 </script>
 </head>
@@ -89,11 +81,14 @@ function numInsert(num1){
 				<img src="resources/static/img/앞모습.bmp" style="max-width: 100%;"
 					usemap="#front-image" alt="앞모습">
 				<map name="front-image">
-					<area shape="circle" alt="팔" coords="26,266,20" data-toggle="modal"
-						data-target="#myModal" style="position: fixed;">
-					<area shape="circle" alt="다리" coords="81,349,34"
-						data-toggle="modal" data-target="#myModal1"
-						style="position: fixed;">
+					<area shape="circle" alt="팔" coords="28,189,17" 
+					data-toggle="modal" data-target="#part1" style="position: fixed;">
+					<area shape="circle" alt="가슴,배" coords="83,168,18"
+						data-toggle="modal" data-target="#part3" style="position: fixed;">
+						<area shape="circle" alt="무릎" coords="82,335,18"
+						data-toggle="modal" data-target="#part4" style="position: fixed;">
+						<area shape="circle" alt="어깨" coords="130,119,18"
+						data-toggle="modal" data-target="#part5" style="position: fixed;">
 				</map>
 			</div>
 			<div class="wrap" id="behind" style="display: none;">
@@ -101,11 +96,13 @@ function numInsert(num1){
 				<img src="resources/static/img/뒷모습.bmp" style="max-width: 100%;"
 					usemap="#behind-image" alt="뒷모습">
 				<map name="behind-image">
-					<area shape="circle" alt="팔" coords="34,190,17" data-toggle="modal"
-						data-target="#myModal3" style="position: fixed;">
-					<area shape="circle" alt="다리" coords="81,349,34"
-						data-toggle="modal" data-target="#myModal4"
-						style="position: fixed;">
+					<area shape="circle" alt="다리" coords="80,364,19" data-toggle="modal"
+						data-target="#part2" style="position: fixed;">
+						<area shape="circle" alt="등" coords="82,133,19" data-toggle="modal"
+						data-target="#part6" style="position: fixed;">
+						<area shape="circle" alt="엉덩이" coords="81,249,19" data-toggle="modal"
+						data-target="#part7" style="position: fixed;">
+					
 				</map>
 			</div>
 		</div>
@@ -115,14 +112,6 @@ function numInsert(num1){
 	<%@ include file="include/footer.jspf"%>
 </div>
 </body>
-<!-- 모달 영역 -->
-<!-- 앞모습  -->
-
-
-	
-
-<!-- 글쓰기 -->
-
 
 <%@ include file="exPage/exBoardList.jsp"%>
 <%@ include file="exPage/exBoardContent.jsp"%>

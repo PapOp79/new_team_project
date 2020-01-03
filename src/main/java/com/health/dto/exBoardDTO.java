@@ -11,32 +11,14 @@ private Date savedate;
 private int part;
 private int num;
 private String link;
-private int startPage;
-private int endPage;
-private int totalEndPage;
 
 
 
 
 
-public int getStartPage() {
-	return startPage;
-}
-public void setStartPage(int startPage) {
-	this.startPage = startPage;
-}
-public int getEndPage() {
-	return endPage;
-}
-public void setEndPage(int endPage) {
-	this.endPage = endPage;
-}
-public int getTotEndPage() {
-	return totalEndPage;
-}
-public void setTotEndPage(int totEndPage) {
-	this.totalEndPage = totEndPage;
-}
+
+
+
 public String getLink() {
 	return link;
 }

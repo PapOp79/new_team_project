@@ -136,11 +136,11 @@
 	</delete>
 	
 	<update id="exboardmodify" parameterType="Edto">
-	update exBoard set title=#{title}, content=#{content}, link=#{link} where num=#{num}
+	update exBoard set title=#{title}, content=#{content}, link=#{link},part=#{part} where num=#{num}
 	</update>
 	
-	<select id="exboardgetTotalPage" resultType="int">
-      select count(*) from exboard
+	<select id="exBoardgetTotalPage" resultType="int">
+      select count(*) from exBoard
     </select>
 
 	<!-- ==============게시판============== -->
@@ -183,5 +183,9 @@
      	    	
     <select id="commentlist" resultType="Cdto">
     	select * from commentDB where boardnum=#{num}
+    </select>
+    
+    <select id="commentlist_id" resultType="String">
+    	select commentid from commentDB where boardnum=#{num}
     </select>	  	
 </mapper>

@@ -1,6 +1,7 @@
 package com.health.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.health.dao.userDAO;
+import com.health.dto.commentDTO;
 import com.health.service.BoardService;
+import com.health.service.CommentListService;
 import com.health.service.CommentService;
 import com.health.service.LockerService;
 import com.health.service.LoginService;
 import com.health.service.TicketService;
+import com.health.service.commentListServiceImpl;
 import com.health.service.exBoardService;
 
 import com.health.service.exBoardListServiceImpl;
@@ -35,6 +39,7 @@ public class mainController {
 	private BoardService board;
 	private exBoardService eboard;
 	private CommentService comment;
+	private CommentListService commentL;
 	private ApplicationContext applicationContext = applicationContextprovider.getApplicationContext();
 
 	@RequestMapping("index")
@@ -44,7 +49,7 @@ public class mainController {
 
 	@RequestMapping("ex")
 	public String ex(HttpServletRequest request, Model model) {
-		eboard = (exBoardListServiceImpl)applicationContext.getBean("exBoardListServiceImpl");
+		eboard = (exBoardService)applicationContext.getBean("exBoardListServiceImpl");
 		eboard.execute(model);
 	
 		return "ex1";
@@ -390,15 +395,33 @@ public class mainController {
 	   //=============================댓글=======================================
 	   
 	   @RequestMapping("commentregister")
-	   public String commentregister(Model model, HttpServletRequest request) {
+	   @ResponseBody
+	   public int commentregister(Model model, HttpServletRequest request) {
 		   model.addAttribute("request",request);
-		   
 		   comment = (CommentService) applicationContext.getBean("commentRegisterServiceImpl");
-		   comment.execute(model);
 			
-		   return "index";
+		   return comment.execute(model);
+	   }  
+	   
+	   @RequestMapping("commentlist")
+	   @ResponseBody
+	   public List<commentDTO> commentlist(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   commentL = (CommentListService) applicationContext.getBean("commentListServiceImpl");
+		   commentL.execute(model);
+			
+		   return commentL.execute(model);
 	   }
 	   
+	   @RequestMapping("reply_id")
+	   @ResponseBody
+	   public List<commentDTO> reply_id(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   commentL = (CommentListService) applicationContext.getBean("commentListReplyIdServiceImpl");
+		   commentL.execute(model);
+		   
+		   return commentL.execute(model);
+	   }
 	   @RequestMapping("idDuplicateChk")
 	   @ResponseBody
 		public int idDuplicatechk(Model model, HttpServletRequest request) throws Exception{

@@ -24,4 +24,8 @@ public class commentDAO {
 	public List<commentDTO> commentlist(int boardnum) {
 		return sqlSession.selectList(namespace + ".commentlist", boardnum);
 	}
+	
+	public List<commentDTO> commentlist_id(int boardnum) {
+		return sqlSession.selectList(namespace + ".commentlist_id", boardnum);
+	}
 }
