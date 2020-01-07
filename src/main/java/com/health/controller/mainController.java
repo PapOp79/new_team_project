@@ -412,12 +412,21 @@ public class mainController {
 			
 		   return commentL.execute(model);
 	   }
+
+	   @RequestMapping("commentdel")
+	   @ResponseBody
+	   public int commentdel(Model model, HttpServletRequest request) {
+		   model.addAttribute("request",request);
+		   comment = (CommentService) applicationContext.getBean("commentDelServiceImpl");
+		   comment.execute(model);
+		   
+		   return comment.execute(model);
+	   }
 	   
 	   @RequestMapping("commentmodifychk")
 	   @ResponseBody
 	   public int commentmodifychk(Model model, HttpServletRequest request) {
 		   model.addAttribute("request",request);
-			
 		   comment = (CommentService) applicationContext.getBean("commentModifyCheckServiceImpl");
 		   
 		   return comment.execute(model);
@@ -428,8 +437,8 @@ public class mainController {
 		public int idDuplicatechk(Model model, HttpServletRequest request) throws Exception{
 		   model.addAttribute("request",request);
 		   login = (LoginService) applicationContext.getBean("idDuplicateChk");
-			int result = login.execute(model);
-			System.out.println(result);
+		   int result = login.execute(model);
+		   System.out.println(result);
 		   return result;
 		}
 }

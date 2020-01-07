@@ -4,71 +4,72 @@
 <html>
 <head>
 <script>
-	function contentdel() {
-		var delnum =
-		<%=request.getParameter("num")%>;
-
-		if (confirm("정말로 삭제하시겠습니까?") == true) {
-			location.href = 'boardcontentdelete-controller?num=' + delnum;
-			location.href = "boardcontentdelete";
-		} else {
-			return false;
-		}
-	}
-	
-	function modifychange(num){
-		var formname = 'form'+num
-		var form = document.getElementById(formname);
-		var comment = form.elements[2];
-		var submitbutton = form.elements[3];
-		comment.value="";
-		comment.focus();
-		comment.readOnly=false;
-		submitbutton.innerHTML="확인"
-		submitbutton.setAttribute("onclick", "commentmodify("+formname+")");
-	}
-	
-	function commentlist(){
-		var num=<%=request.getParameter("num")%>
+	function contentdel(Cnum) {
 		$.ajax({
-			url:'commentlist',
+			url:'commentdel',
 			type:'POST',
-			async:false,
-			data:{'num':num},
-			datatype:'json',
+			data:{'delnum':Cnum},
 			success : function(data){
-				var html=""
-				var values = [];
-				values = data;
-				if(data.length>0){
-					$.each(values, function(index, Cdto){						
-						html += "<form action='commentmodifychk' id='form"+Cdto.commentnum+"'method='post'>";
-						html += "<div>";
-        	            html += "<div><table class='table'>";
-            	        html += "<tr><td><input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+Cdto.commentnum+"'></td>";
-            	        html += "<td><input type='text id='commentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+Cdto.commentId+"'></td>";
-            	        html += "<td><input type='text id='commentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+Cdto.commentation+"'></td>";
-            	        html += "<td>"+Cdto.regdate+"</td>";
-            	        html += "<td><button class='orange_btn' type='button' style='width:25%;'" + 
-            	        		"id='commentmodifyok' onclick='modifychange("+Cdto.commentnum+")'>수정</button></td>";
-            	        html += "<td><button class='orange_btn' type='button' style='width:25%;'" + 
-            	        		"id='commentmodifyno' onclick='commentdel()'>삭제</button></td></tr>";
-                	    html += "</table></div>";
-                    	html += "</div>";
-                    	html += "</form>";
-					});
-				}else{
-					html += "<div>";
-	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-	                html += "</table></div>";
-	                html += "</div>";
+				if(data == 1){
+					commentlist();
 				}
-				$("#commentList").html(html);
+				else{
+					commentlist();
+				}
+				
 			},
-			error : function(){alert('fail!')}
+			error : function(){alert('fail')}
 		});
 	}
+	
+	
+	function replaceAll(str, searchStr, replaceStr) {
+		return str.split(searchStr).join(replaceStr);
+		}
 
+	function modifychange(chbtn, commentnum){
+		var Ccomment=$(chbtn).parent().html();
+		//var con = Ccomment.replace("value", "\r\n");
+		var con=replaceAll(Ccomment,"<br>","\r\n");
+		var commentId = "<%=(String)session.getAttribute("user_id")%>";
+		var num = <%=request.getParameter("num")%>
+		var html = "";
+		
+		html += "<form id='modifycommentform' name='modifycommentform'><input type='hidden' id='MocommentNum' name='MocommentNum' readonly='readonly' value='"+commentnum+"'>";
+		html += "<input type='text' id='MocommentId' class='gray_textbox' name='MocommentId' readonly='readonly' value='"+commentId+"'>";
+		html += "<input type='text' id='Mocommentation' name='Mocommentation' class='gray_textbox' value='' style='width:40%'>";
+		html += "<button class='orange_btn' type='button' style='width:25%;'" +
+				"id='suc_btn' onclick='suc_btn()'>확인</button>";
+		html += "<button class='orange_btn' type='button' style='width:25%;'" +
+				"id='no_btn' onclick='commentlist()'>취소</button>";
+		html += "</form>";
+		
+		$(chbtn).parent().html(html);
+		
+		$('#suc_btn').click(function(){
+			$.ajax({
+				type:'POST',
+				url:'commentmodifychk',
+				data:$("#modifycommentform").serialize(),
+				success:function(data){
+					commentlist();
+				},
+				error:function(data){alert('fail')},
+			})
+		});
+	}
+	
+	function commentdel(Cnum){
+		var delchk = confirm('댓글을 삭제 하시겠습니까?');
+		alert(delchk)
+		if(delchk == true){
+			contentdel(Cnum);
+		} else{
+			commentlist();
+		}
+		
+	}
+	
 	function commentadd(code){
 		$.ajax({
 			url:'commentregister',
@@ -83,20 +84,91 @@
 		});
 	}
 
-	function commentmodify(formname){
-		var formname = <%=request.getAttribute("formname")%>
+	function commentlist(){
+		var user = "<%=(String)session.getAttribute("user_id")%>";
+		var num = <%=request.getParameter("num")%>
+		
 		$.ajax({
-			url:'commentmodifychk',
 			type:'POST',
-			data:{'formname':formname},
+			url:'commentlist',
+			data:{'num':num},
+			
+			success:function(data){
+				var html = "";
+				var cCnt = data.length;
+				
+				if(data.length > 0){
+					html += "<div>";
+					for(i = 0; i < data.length; i++){
+						
+						html += "<input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+data[i].commentnum+"'>";
+						html += "<input type='text' id='LicommentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+data[i].commentId+"'>";
+						html += "<input type='text' id='Licommentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+data[i].commentation+"'>";
+						html += data[i].regdate;
+						
+						if(user == data[i].commentId){
+							html += "<button class='orange_btn' type='button' style='width:25%;'" +
+        	        				"id='commentmodifyok' onclick='modifychange(this, "+data[i].commentnum+");'>수정</button>";
+        	        		html += "<button class='orange_btn' type='button' style='width:25%;'" +
+        	        				"id='commentdel' onclick='commentdel("+data[i].commentnum+");'>삭제</button>";
+        	        		}
+						html += "</div><div>";
+						}
+        	        		html += "</div>";
+					}else{
+						html += "<div>";
+		                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+		                html += "</table></div>";
+		                html += "</div>";
+					}
+				$("#commentList").html(html);
+				},
+				error:function(data){alert('fail')}
+			});
+		}
+
+
+		
+		<%-- var num=<%=request.getParameter("num")%>
+		$.ajax({
+			url:'commentlist',
+			type:'POST',
+			async:false,
+			data:{'num':num},
+			datatype:'json',
 			success : function(data){
-				if(data == 1){
-					commentlist();
+				var html=""
+				var values = [];
+				values = data;
+				if(data.length>0){
+					$.each(values, function(index, Cdto){
+						html += "<form action='commentmodifychk' id='form' method='post'>";
+						html += "<div>";
+        	            html += "<div><table class='table'>";
+            	        html += "<tr><td><input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+Cdto.commentnum+"'></td>";
+            	        html += "<td><input type='text id='commentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+Cdto.commentId+"'></td>";
+            	        html += "<td><input type='text id='commentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+Cdto.commentation+"'></td>";
+            	        html += "<td>"+Cdto.regdate+"</td>";
+            	        html += "<td><button class='orange_btn' type='button' style='width:25%;'" +
+            	        		"id='commentmodifyok' onclick='modifychange()'>수정</button></td>";
+            	        html += "<td><button class='orange_btn' type='button' style='width:25%;'" +
+            	        		"id='commentmodifyno' onclick='commentdel()'>삭제</button></td></tr>";
+                	    html += "</table></div>";
+                    	html += "</div>";
+                    	html += "</form>";
+					});
+				}else{
+					html += "<div>";
+	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+	                html += "</table></div>";
+	                html += "</div>";
 				}
+				$("#commentList").html(html);
 			},
-			error : function(){alert('fail')}
-		});
-	}
+			error : function(){alert('fail!')}
+		}); --%>
+	
+
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -105,7 +177,7 @@
 	href="${pageContext.request.contextPath}/resources/static/css/agency.min.css?ver=1.2.18">
 <%@ include file="include/header.jspf"%>
 
-<body style="background-color: #111111;" onload = "commentlist();">
+<body style="background-color: #111111;" onload = "commentlist()">
 	<form action="boardmodify" method="post">
 		<div align="center" style="margin-top: 5%;">
 			<div style="font-family: dohyun; color: white; margin-right: 20%;">아이디</div>

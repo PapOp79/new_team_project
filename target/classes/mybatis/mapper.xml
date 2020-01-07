@@ -190,6 +190,6 @@
     </update>
     
     <delete id="commentdel" parameterType="int">
-     	delete from commentDB where boardnum=#{num} 
+     	delete from commentDB where commentnum=#{delnum} 
     </delete>  	
 </mapper>

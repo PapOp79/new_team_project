@@ -28,4 +28,8 @@ public class commentDAO {
 		return sqlSession.update(namespace + ".commentmodifychk", Cdto);
 	}
 
+	public int commentdel(int delnum) {
+		return sqlSession.delete(namespace + ".commentdel", delnum);
+	}
+
 }
