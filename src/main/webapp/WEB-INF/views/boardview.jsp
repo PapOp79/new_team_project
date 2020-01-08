@@ -38,9 +38,9 @@
 		html += "<form id='modifycommentform' name='modifycommentform'><input type='hidden' id='MocommentNum' name='MocommentNum' readonly='readonly' value='"+commentnum+"'>";
 		html += "<input type='text' id='MocommentId' class='gray_textbox' name='MocommentId' readonly='readonly' value='"+commentId+"'>";
 		html += "<input type='text' id='Mocommentation' name='Mocommentation' class='gray_textbox' value='' style='width:40%'>";
-		html += "<button class='orange_btn' type='button' style='width:25%;'" +
+		html += "<button class='orange_btn' type='button' style='width:15%;'" +
 				"id='suc_btn' onclick='suc_btn()'>확인</button>";
-		html += "<button class='orange_btn' type='button' style='width:25%;'" +
+		html += "<button class='orange_btn' type='button' style='width:15%;'" +
 				"id='no_btn' onclick='commentlist()'>취소</button>";
 		html += "</form>";
 		
@@ -61,7 +61,6 @@
 	
 	function commentdel(Cnum){
 		var delchk = confirm('댓글을 삭제 하시겠습니까?');
-		alert(delchk)
 		if(delchk == true){
 			contentdel(Cnum);
 		} else{
@@ -87,6 +86,8 @@
 	function commentlist(){
 		var user = "<%=(String)session.getAttribute("user_id")%>";
 		var num = <%=request.getParameter("num")%>
+		var admin = <%=request.getParameter("Admin")%>
+		var secret = <%=request.getParameter("commentsecret")%>
 		
 		$.ajax({
 			type:'POST',
@@ -100,27 +101,60 @@
 				if(data.length > 0){
 					html += "<div>";
 					for(i = 0; i < data.length; i++){
-						
-						html += "<input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+data[i].commentnum+"'>";
-						html += "<input type='text' id='LicommentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+data[i].commentId+"'>";
-						html += "<input type='text' id='Licommentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+data[i].commentation+"'>";
-						html += data[i].regdate;
-						
-						if(user == data[i].commentId){
-							html += "<button class='orange_btn' type='button' style='width:25%;'" +
-        	        				"id='commentmodifyok' onclick='modifychange(this, "+data[i].commentnum+");'>수정</button>";
-        	        		html += "<button class='orange_btn' type='button' style='width:25%;'" +
-        	        				"id='commentdel' onclick='commentdel("+data[i].commentnum+");'>삭제</button>";
-        	        		}
+						if(data[i].commentsecret == 1){
+							if(admin > 0 || data[i].commentId == user){
+								html += "<a style='color:white'>[비밀댓글]</a>";
+								html += "<input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+data[i].commentnum+"'>";
+								html += "<input type='text' id='LicommentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+data[i].commentId+"'>";
+								html += "<input type='text' id='Licommentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+data[i].commentation+"'>";
+								html += data[i].regdate;
+								html += "<button class='orange_btn' type='button' style='width:15%;'" +
+		        	        			"id='commentmodifyok' onclick='modifychange(this, "+data[i].commentnum+");'>수정</button>";
+		        	        	html += "<button class='orange_btn' type='button' style='width:15%;'" +
+		        	        			"id='commentdel' onclick='commentdel("+data[i].commentnum+");'>삭제</button>";
+								html += "</div><div>";
+								}else{
+									html += "<a style='color:white'>[비밀댓글]</a>";
+									html += "<input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+data[i].commentnum+"'>";
+									html += "<input type='text' id='LicommentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+data[i].commentId+"'>";
+									html += "<input type='text' id='Licommentation' name='commentation' class='gray_textbox' readonly='readonly' value='[비밀댓글입니다.]'>";
+									html += data[i].regdate;
+								}
+							html += "</div><div>";
+							}else{
+								html += "<input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+data[i].commentnum+"'>";
+								html += "<input style='margin-left:3.8%' type='text' id='LicommentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+data[i].commentId+"'>";
+								html += "<input type='text' id='Licommentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+data[i].commentation+"'>";
+								html += data[i].regdate;
+								if(data[i].commentId == user){									
+								html += "<button class='orange_btn' type='button' style='width:15%;'" +
+        	        					"id='commentmodifyok' onclick='modifychange(this, "+data[i].commentnum+");'>수정</button>";
+        	        			html += "<button class='orange_btn' type='button' style='width:15%;'" +
+        	        					"id='commentdel' onclick='commentdel("+data[i].commentnum+");'>삭제</button>";
+								}
+							}
 						html += "</div><div>";
 						}
-        	        		html += "</div>";
-					}else{
-						html += "<div>";
-		                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-		                html += "</table></div>";
-		                html += "</div>";
-					}
+						
+						/* html += "<input type='hidden' id='commentNum' name='commentNum' readonly='readonly' value='"+data[i].commentnum+"'>";
+						html += "<input type='text' id='LicommentId' class='gray_textbox' name='commentId' readonly='readonly' value='"+data[i].commentId+"'>";
+						html += "<input type='text' id='Licommentation' name='commentation' class='gray_textbox' readonly='readonly' value='"+data[i].commentation+"'>";
+						html += data[i].regdate; */
+						
+						/* if(user == data[i].commentId){
+							html += "<button class='orange_btn' type='button' style='width:15%;'" +
+        	        				"id='commentmodifyok' onclick='modifychange(this, "+data[i].commentnum+");'>수정</button>";
+        	        		html += "<button class='orange_btn' type='button' style='width:15%;'" +
+        	        				"id='commentdel' onclick='commentdel("+data[i].commentnum+");'>삭제</button>";
+        	        		}
+						html += "</div><div>"; */
+						}else{
+							html += "<div>";
+			                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+			                html += "</table></div>";
+			                html += "</div>";
+						}
+					html += "</div>";
 				$("#commentList").html(html);
 				},
 				error:function(data){alert('fail')}
