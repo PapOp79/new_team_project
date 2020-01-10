@@ -31,14 +31,13 @@ color:white;
       <span style="color: #fe6000;">HOUGYM User</span> 회원 가입<br><br>
    </h4>
    <br>
-   <form action="join-controller" name="signup"
-      id="signUpForm" method="post" style="width: 100%;">
+   <form action="join-controller" name="registerForm"
+      id="registerForm" method="post" style="width: 100%;">
       <table style="width: 100%;">
-           <tr>
+         <tr>
            <td>
             <input class="gray_textbox" type="text" style="margin-left:15%; width:85%; height:30px; align-self: center;"  value="0" id ="Admin" name = "Admin" hidden="true">
            </td>
-            
          </tr>
          <tr>
             <td>
@@ -60,7 +59,8 @@ color:white;
          <tr>
             <td style="text-align: left">
                 <p>
-                  비밀번호를 입력해주세요.&nbsp;&nbsp;&nbsp;<span id="pwChk"></span>
+                <span id="pwChk">  비밀번호를 입력해주세요.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span id="pwchkresult" style="color: white; font-family: dohyun; font-style: italic;"></span>
                </p>
             </td>
          </tr>
@@ -75,7 +75,8 @@ color:white;
          <tr>
             <td style="text-align: left">
                 <p>
-                  비밀번호를 재확인해주세요.&nbsp;&nbsp;&nbsp;<span id="pwChk2"></span>
+                  <span id="pwChk2">비밀번호를 재확인해주세요.&nbsp;&nbsp;&nbsp;</span>
+                   <span id="pwchk2result" style="color: white; font-family: dohyun; font-style: italic;"></span>
                </p>
             </td>
          </tr>
@@ -183,8 +184,8 @@ color:white;
          </tr>
 
          <tr>
-            <td style="width: 100%; text-align: center; colspan: 2;"><input
-               type="submit" value="회원 가입" class="orange_btn" id="signup-btn" style="background-color: #fe6000; margin-top: 0; height: 40px; width:70%; color: white;" onclick="">
+            <td style="width: 100%; text-align: center; colspan: 2;">
+            <input type="button" value="회원 가입" class="orange_btn" id="signup-btn" onclick="registerchk()" style="background-color: #fe6000; margin-top: 0; height: 40px; width:70%; color: white;">
             </td>
          </tr>
       </table>
@@ -197,6 +198,9 @@ color:white;
 </body>
 
 <script type="text/javascript">
+	var check1 = false;
+	var check2 = false;
+	var check3 = false;
 
 	function IdDuplicatechk(){
 		var register_Id = $('#userId').val()
@@ -210,15 +214,15 @@ color:white;
 					$('#userId').css('background-color', '#fe6000');
 					$('#idchkresult').text("아이디 중복이야!   ")
 					$('#idchkresult').append("<img src='resources/static/img/cancel.png' style="+'width:20px; height:20px;'+">")
+					check1 = false;
 				} else{
 					$('#userId').css('background-color', 'rgb(61,61,61)');
 					$('#idchkresult').text("아이디 가능이야!   ")
 					$('#idchkresult').append("<img src='resources/static/img/checked.png' style="+'width:20px; height:20px;'+">")
-					
-					
+					check1 = true;
 				}
 			}
-		})		
+		});		
 	}
 
 	$(function(){
@@ -227,15 +231,63 @@ color:white;
 			$('#pwchk').blur(function(){
 			   if($('#userPw').val() != $('#pwchk').val()){
 			    	if($('#pwchk').val()!=''){
-				    alert("비밀번호가 일치하지 않습니다.");
-			    	    $('#pwchk').val('');
-			          $('#pwchk').focus();
+				    $('#pwchk2result').html('비밀번호가 일치하지 않습니다.&nbsp;&nbsp;&nbsp;');
+					$('#pwchk2result').append("<img src='resources/static/img/cancel.png' style="+'width:20px; height:20px;'+">")
+			    	$('#pwchk').val('');
+			        $('#pwchk').focus();
+			        check2 = false;
 			       }
+			    } else {
+			    	$('#pwchk2result').html('비밀번호가 일치합니다&nbsp;&nbsp;&nbsp;');
+					$('#pwchk2result').append("<img src='resources/static/img/checked.png' style="+'width:20px; height:20px;'+">")
+					check2 = true;
 			    }
 			})  	   
 		});
-
 	
+	function pwdoublechk(){
+		if(check3 == false){
+			$('#userPw').val('');
+	        $('#userPw').focus();
+		}
+	}
+
+	//패스워드 입력값 검증.
+	$('#userPw').on('keyup', function() {
+			
+		//자바스크립트 정규 표현식
+		const getPwCheck= RegExp(/([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])/);
+		//비밀번호 공백 확인
+		if($("#userPw").val() == ""){
+		    $('#userPw').css("background-color", "pink");
+			$('#pwchkresult').html('[패스워드는 필수정보에요!]&nbsp;&nbsp;&nbsp;');
+			$('#pwchkresult').append("<img src='resources/static/img/cancel.png' style="+'width:20px; height:20px;'+">")
+			check3 = false;
+		}		         
+		//비밀번호 유효성검사
+		else if(!getPwCheck.test($("#userPw").val()) || $("#userPw").val().length < 8){
+		    $('#userPw').css("background-color", "pink");
+			$('#pwchkresult').html('[특수문자 포함 8자이상 비밀번호를 입력하세요]&nbsp;&nbsp;&nbsp;');
+			$('#pwchkresult').append("<img src='resources/static/img/cancel.png' style="+'width:20px; height:20px;'+">")
+			check3 = false;
+		} else {
+			$('#userPw').css("background-color", "rgb(61,61,61)");
+			$('#pwchkresult').html('[사용 가능한 비밀번호입니다!]&nbsp;&nbsp;&nbsp;');
+			$('#pwchkresult').append("<img src='resources/static/img/checked.png' style="+'width:20px; height:20px;'+">")
+			check3 = true;
+		}
+		
+	
+	});
+	
+	function registerchk(){
+		if(check1 == true && check2 == true && check3 == true){
+			document.getElementById('registerForm').submit();
+		} else {
+			alert('모든 값을 채워주셔야 합니다.');
+		}
+	}
+
 
 </script>
 </html>
